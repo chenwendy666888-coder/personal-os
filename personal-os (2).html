@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="人生OS">
+<meta name="theme-color" content="#ffffff">
+<title>人生 OS</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAu4klEQVR42u29W49k6XUlttbe3zkRmVlZ177y3hSnRWpIiUMJMsTxYOwZw9DAsA3DgN/8YMN+85t/iJ8M+KInAwYMwzZkeADDgxlo7KExHowkSxQpSmy2yDbZJPtaXVV5iYjz7b388J2IjMys6s66tJjZPLsbVZWRERmRcVbsb+3b2vyDowf4UJMEgOT2jZlpZpjsl94uBIIz6Gm3tBsbvCabAPQY6Gk3TtCZ7KIe6HHhNdkEoMkmmwA02QSgySYATTYBaLLJJgBNNgFosglAk00AmmyyCUCTTQCabALQZBOAJpsANNlkE4AmmwA02QSgySYATTbZBKDJJgBNNgFosglAk032YVY+8b9hm17j+Keg9Rebb2zm23juAdvfetz7n3kFgD6JI1CffAARoAQgjRbl1GW+4L+3v3zc+wPi5oY8d78JQJfe0sTIkpBA5XnvwNP/lkCevX3bxax9kAhuvuSjsURYApTolpMHuuwHFqXR68CEhPbkr8z25qkKkFsXl8RDprMJCR951IyPzTWsiHOP2XwdgIjI/OFycWxOAFRSa+/ICUCXKSjIERSb6MCl27RSBBDP+GLF2t04Hv2jBRBaCJ5w0IgUwNEXXnVi9IkDkLr1yZVak45AuFIohDKbWs2z4CKyEag8RW5G2QkCoNGSBJTtJlIQYa72QCRCE4B+8SeXAElE5dYJIoSUTEEEhITC3drR8WHx0mMnQQzI08eXAAgDQWIGMKEBsaSZBFIwQBCIJODwdYg4AegXgJ6cC3es81RQ28FPCDujEpZXsIR++Nbh/UqHr/nP0wDoXGAPgIIgKnP47A3eubEjyQWDXnaPZKPeSUmSIPOqOKpaFhMT4ASgv+YonQH1hi/Md/rGf7UVNrXLERJRmOb6zhtHr72/X6zgJJg6HYVtoYKnb8Sjv0VAIBGN3IjMWn/3N3aeuzljAsAuyyu73VbAtv4X+SBX3z08CnYEJw/0sSd19BAmYqWaAtmYBaGRl7RTAunNNShNfSm7pVjpk7LmLNACNxuv6BMnEgVQYGgM06o7Gq5EBUTIuLn7SRDoYZblUWHhBKBnxY5H7itqG0UEUgLkbBdRgAONto4+guNfRlkiA1XoK2uXLiBcEE2RVLu3+BBnc94DocX7BJBcf+FZgu0uzR8SSII+gm3jf0IqkMzUKJSvKbkoQS5Ua7/1BKCndzyCACGK5LKT0FcgmTkIIYKiCOpYcNEBtTQL11SphUJJOLKLQmk3knUNPW6ffWvmPZ5O67OuvZTTzqIdPRSOXcfOneqyuhpfZGZD/HiiCoBkyCAy2YtKpmOgQqAJoCVsTFNe/kvzkSqtl4ToCNhRfH622+fIXU7QRRXyesvRAanhn3/7rbcOdt27TXaZZgEByw9Wu4fDTuFSnN988M6rf/bt66uV3AFZjkgynKM5fEhCepPVTiBBq/W9a9de+/VfX3bXhXroeLk7uOarFXa4/hgQMC/DcPgbr5YvPX8t1MvE1GGNwYBELXhvObwfWcuI1ckDPaNAi+hRnoOPKcGzybq1n0iQ3fuLnZ882PPOJFkrI4AJJndoa6Cx7i2Hz77909vLI8AMtj5nTjPqRwNoO58YFNKuHa/eHurPZ2mJTuX94/33UrKxGCcaABrqcvGVFcAipQFGu15skxY4juEdgkKL9bMdgROAnp47N5TkueC7HRSjUyIlmBk7M0dJCky2xIuMEirBSjPZgG5V+iEDYjdG0E9ypSoRVl2r9FyyC5gAV8BIb3K2BFkEUrWAYR0kISVLBNSC+yAagQJQ1HAJE0oit5jZBKCnQJLRNr5gzYQkwMnxVGmcVkzSLFrS0LwR77EwnpAPotFgEbMhGzkh+aSpIFIqYqG508gsvpUTYgsCMisAq4VZ6EGaO2wsdQhr0hPKFTJpCQjqcKmLHZceQDo5ovhojv1gufzp2wtZK1GUxbFKEgGZ5ovlnffe6zODWV10NxpVQb9172DWFalvV49P4SCdnnKTXvzJT3b73WCtZu2gcyWkVT97//kXF6V0Qbfy47sr6GCldKlzfebF/Z7WPOB+6T6jNBJAQHezrpzTEfaE6GnsgYJtPoinpaklkXhwf/XP/nhVZ9dWFpbscM1gEUHF/r17v/bHf/j8sCSDyDKfoS8BDURfMXPn3k7zEMQTdlsk6QCU1+Poy9/9Q1NxLZg+EvzwVL57/eaffvPvv3ljRoWV2Xfe9L/40SDPQXarX/57d9D3NELCczuz54QW3B9nHh3WwScP9OxZtda7FkBKHbTX0Xc60FIc0pSiKr2D7Zn2MggOXRZLo0LRCYUSLMacTusEeaIXQwgSUMz2s5asJgZFSIKIIHeITqlGaIToXJ0bCpBWZKxQJHydVGofElblJQ/ErsIRZlxfpE0Af5IyboXvlFNZalQLqBMtWCWVdMHTc7AwOZNMQrAgCYlGWrboDfmk54QJHHmUVSKhMNo642kKIKmojnDVBCFmVEMveSRJiFKAEgzWeBEJsU5h/FOBR56SWScoBlqkZmCkSubgaeHj8aFw4Lh6Mp2i7LCEIE9T2jCPhcnAsMakiWx1dBtbL9YtRE/ONJIgyRRbu0hq08kablAYlNQ8lmCa2GVJNnaUYQ9SFEogspo5Otv0NbVPiY2VmQlAj2UufX4233M3SZgRchByICn88z9/981DeimuOIpusF2ARuzE8PmDdz518IAwmfnBBzv12HOm9tDtLMDHfzy0RCOz7C2Gr7/z5vGD2oWC5Xu3nn97fpOQGY5q94/+5F6XkKkO9Ruv7r3ywnXpahTmLzOASOQNsxtuwfAkzIRUOlideP+oe/P+XvHOVAGDF4iVYubnHixeOXgvmGY+HB4OMUujKfTXf00ozwx1zuHzD97WcvDUwNmPr916e1Yci+SMYW/dc6irzhzuf7lepc7pywwgJaxKajk3BLNLChiQUUEzeclSgmmDySPEdKi6jrsIBoBUCAaYJGDTzPVszITgyMkaRbP1GjXyJP9QqbQq9FS23DIBUxU4mFM1jXA3qaOvRvq8Tk0BID0JYxJJQZfLMV36ML6lUlCkJNPpoAMOSOZSJ5HppESURNgA9VQSo78RJGbLR0v5DH/hbPQ5lFRSFCVlBhImGUgSZBImKVuWMtv/BhkUoAsx1i1abppblT4irSYXHcTsgoYiy0vFh65CGC+Jog2Hx4sfvVPJXRPC6sHC+yhkJHVzcfz84gEAIvZXw83hcJOtprH0vScIBSnblEOeGkDNH+z2KtYcT2ZiXhgJIcg8WviqPtxhpJAyiq1CdoqanXxpni8Uu+EI0s3v1zxGXKrK2FUA0Fjemt17UP/Zt49W/Q6EpBdmx4UNJcHrR4e/8973ZlEtzaFgARwIiEZq3hdBkEE63XksnO3KeJzXxVTa9V1c67NNnLWCVwvo5Mc/eSuXh8aitS/lmDMCUhYKpQdlYPHWNeCtVwTWOp92yF/Z3Vm/Ur42HPxUUuHlKdNfpUSiWenme9nNgYBgw2ApQKZMkQBVDBDTFCczzGNffStq6qGZJjxpxNPOSEuxVpyU6SAR7m36ImFqeQNqXRJOW1eIK1FbyxvR7ooNiSLVUotECK6TytrkgZ74MBOiZfwTOUtQDDEJgzrxeJzk4dawn1FOGyA9JFVoWxWwjyyG8UNif/J0MZ8416CazApCDM9KBJAkjAkZ0TC01SkitsbXUy+Al204+uqVMgytxc8Lhy6iRFddnQ2EGRzwcTh57AMkFNAjp035MG903kVp8x8AmoO6cB6JkCghqSQKCJIFmOfAHFw+GBYOjK8Y4xyZjdUVg7imSZewrHFVALRpB6JIZhjt86997wtv/0ycQ9qLYy3vL6xnVlP6fM7egBTIGiU0UOSpFmOKw3Lxwd27o7dI3bp9p9+Zp2L7Wb01EN3YRd9REo2rxAdHIHSx4ispUhFD/ugdOQfJwM/99OBle32Wq1Qe7O3/+W989W6/L4je/cnrww9+dFdkZtwoD/7O1z416zsJoLV+7UvV6nr1PFAQRgK89cHdz/78xzHrujoIWJmXaD1YKDKErR3GwwfeaRRQl0Ojr1XSVh/+GS9lpXCnhyBasgpyMS7GZduwRgGxGNatk/nS0fEsvJbVwnT96MUfDKpz6wLG2b2j7n2RQCaOeq5Y5mOD9pRI/GiOobMpoHPmOQ46gGYsUgeDkB3NyiqzGEizNK4njMUtEYSTKKwdJWalNc/zw2oHLZ2JlKz9VMV447qMr7PIOxPfMUWyNa1K7lItCs7mUZY+Y6SnCSBVQPcwoAZKZ2YJXV4dsMsDIFo6kGGZbcxG6jKQgiyt+nqOuOV/Z1llA+BAayj05kBcEYQYhJ/ERFvAMBqsRdxu5oIqsz32YbnmlqmBYA4TVqKBoNNAiKSpODo3I8hERkYBJYgphlCZptNsS2xEhw4mskJZijNWZgVDZoFMrSIbzEyYrTvsNQHokR9yQomcCTetGyHlnJuhzdvwIeSXY8M8QFopYw8pxw6Qh9ry+DhrgDQyh/q4l4REqi4ePChjUK54KzgvY4RuNpvvaJxsrA7YbN2SKmScDF5z3ZEiDn1dvPjOO93hYVCdFg92n7+/t59jM8dlL6hepiOMIdVddL/S9x2SZonOpEAyx2nBR50vZuzm89auUTYnznkuQj64d391eGwutkIEH292z4gaqw/efbsLgEVEvAdTtpYy6/r5pz/dpr+S6kHb3dH6Ra4Oj1znPgbM28f3f/MvvnvQGxlQfP+LX//u7s0AxNXlVzS7RACqoFgc6QJhSHqLv2mJkYMY8+xY2DqbJyg3c3+PpLNwsKdvjbeO+aIcydGpZGMroo0DrzSgC1GwDsWdCREwgFbGecFSaK1lbT2R02pxGstdJ3P7624hy/nK2FvejqASyT4TCJdJmubCHusMa81Ym+KQojWuquVRLGWB7pHVaD5OQvmE4pInN+hhSerxjxTUwuhkggaehPGNQY/wa4jUuRzgOsN8Lq0VrX2eVmmeY0V1PJonAD1eWWDrrEkJEQWScy2RUC1Xst3TSNHTPKNgCZKU4lGpXkFGjpp0bVyrsJwL4kfPl9l6OjYvsBXJlJkY+7gJmKg29IMY7yWxza5i6gd6RnhK92999+fvHpTsOqLG4EPZ25rzcSCBAsQT/PyUStfffu5OO30SKl2XJ6mgdbgkOLh694PQBy17FHXlD3VVRNR69+33mgvK1PWbN2a7Oy0zSbd+d76+I2M5oCa4Xf4QAShBJGnilWhJvExH2MkbNp4qZvrZQffmBzdK8XZKdK29ZuyeKRKhObF8zOys2JJEVsrOXFRm+ibfs51zWh9sXAzdcgCNpEX1OJXm2Rx/EoflakR/pK4lSGocWOR6qHoEUZu7Bi030WOLN5kG5mVrHbuamejO0Rd4GbN2SJEanbxiLEA+OddUqkmtepPA4+lm6XFUlIAbSxHHw47GEx27zDNEbqRWxk0Av9ZgeIgo2lW3yw6gdQa4pUyMHcMGSxIFJlklV1CFPuwXMbN1PDe2nNo6LNKytssakLvJRxne9sAwMOGJWA7DYmWkyDoMw9ESEFRFet+bbTnAUX61KSOcPZW3Eu0aM4NXpXv+KgKoqWq00dQus6wOn3/3XYv05I6Wtw8eVJu5Uo9OHBIYMuuDQxerCWTUiDadISz2ytHf+ixBCIMlf/Tz2UEYvVtfZ0sDuKx18aUX4vZuv1qJqikdH0MyVlgff/mWvXMf6yavdfDEh70Ybr6nrrTpZWvJgHEqFZNG4sfFj0i/fv/ga3/8L19cHQQsQJNoCibzEe+7BPdYLu++825nHpQEB80sTb6K5Y3d3X/nGzIQmLm9+z/8X3vfecd6P3PRF579N7/c/dYX/Og4TWl5ndZmY63beeO/+H387P2u6x8ra1O6zruCbQEXnQ8qNQHo2VgwF16guYFi3ylcBC0QlqWE9Oh8sgGdl8Kxx2zTMihiZ0AdFupCmYy+awE4ubUeBZ4Cqah5fJTLRTiTBlQKhMpgKZ1IH144XNh0CjQNYvGqbtG4RMVUwmRLhZ/PJdsoMzYUgFCO+gpyGfHwWrXWBBsQFG3xwSb3TEqGcDNZNF08GqChoBi6GHlxNbpIZRrkHu7y5rBIQWqtIzCw6YK0zo3BVHKs7n8kKtqJZw/vTzPCCy2JS5uUvmwe6BH9omqtZCJUlLHG1xm5sFH0NNFOq5ZjycaFz14Acewv3qSIVTHkarUyW248H2oxLOqwqxyrcuuRryaDJ8dSsdKqF1LqaLsswUbpRcm2SPKTQYCTB/rrgNip8066tWddYSTc7YHH2ye64o/wfqzI2b/xNX5jBXNbP4mTTO0Deula1iWaDoMKgCTMLGu+/A++ib/zNRbAffXWB+/9z9+6fUwBsHxw7/2Dw3uyopS53bpzm26PobfBMQgd5zhSWxOLE4AeFrBDvk7nn38vSdo6wh7HLTaFqrFK1WY3WxPFvI8M85LDApnrQZmt1N845LCJvrXz/A17wVuFcyvjSANQh8zMYttcKwmozr50h34HmcV73Xpn0RHHEiQ31rDlEG4BdF1P8DHVWrQWjm3db+PpOwHo0c5F9qGVoO0FFzoraaixEE+BNRWtupRoqUd+lBsjMdREVcsc4oSaNBIWThP9jHIqlcOCq4S47JGruiujZUlWElTaKGJntKdzuAQuY3HjSh1hklKjaBOVW5fSAbqbgZAZ2XXoOs+AFy8te3gB0dx1ZaqcZrgAqoFCCSXPVdQ3napkQEeHR9eO2WTCu75TMWQqkamWy8Qny64GgLQ5w/rO0FHWatfZUo0AkscPDsKQlAFEzVmRkub16Hic8dlubNW6DXrUgPqQHkZsMtdJhOFcJRVhgOAZ/U6/96982ZYwsDcsf/RW984BjICelEM3ibOTgusEoCcORWQgd3dQZGgCTDmmdozLxeKDN98GqXFFxraOPN0MUtpWNNT6LThOINaP0pZaa9jTH3YFma2uUbvbu6/8x7+bcAjdzP7iv/lf9352t5/NTClF09F/nM8MoLZkY9QAXffBTbPxT3GKDS2YNyQkZclRr4VuJJtQq3BqBEySCM/17OfYFtZKXWIqSLQ7PNmLakV1KRSHeQy5Ur11qcxRPZHWhPrW0o4X+chIG0FRbYVlk7zL05nrZCWqwHTSaE1JBSw56kFr3dxqQpDEydEjADBXZgApk0o0P0RedGnqeZorqK1LITGOoLaDr51A42sEzzihUYVeV3Vt4VUCkBBAdSGBCi0gk5gJYKl4oHDR04I5J31Uf4KQC2aTM2g8OoH5kscZgw/P92U5M4b6IKjKwTOI/kKvh6jyTl1hlQXMkGINl5YOkpbMZEKeWauO140fBDmuFEJ4ZsQ1Ocrobkyj+zRNAPp4+BCFlcL/9q/a524jVgD6xIurofWdMnD0re/s//SApaDWo+d39/61r2axjfBlu/p7XVm8d++1//J/6UmSx8PqU//uv7r/6ktDXcAu8iqQ0szLG//b/42/+Mlsp8+hDs/tfu4/+NfZdVKEcu/m9Rsvv9jPPGoe39j1f/AN7hSkmiDnSJFdvHv04J/++f7ySrZ1XM1MNLkyXPvsLX7lhVqXHczMyMZ+QnS8/obfHcqs12LArWs7X/9C7TkbItax1rFr1nX4/k9m/91P7yw7GO7Gkn932bFDrIaL6LW2La2O2V+9s/tHPy+7O7kaDj+7vxJmLF0FOpZZ3+/u2q7navDre92rL2GniXGoDRsihR782UH8n2mJ9Glj4cedaCQEmbJT1ggOdYjQevExpYTAHgOQ2f7vhqzLoSozg2vfEhZDKMO62bxPo1lXxGKDsHK7SMqvhUYgbdbbTpn1HsjadfN00zAYnIlEZvUhfQhbZQ51mIGhk95EyNKiSmZpUopoWohwQJNK68fmg9roLwmzraiGI70wtpQ/Ocpe0oxoq+o2yT+aETZKeEpQ2pgZuvDOFcIFS0kppTIkFaEJItp6iodQm2Vmq9nzRAtNAMxIK2rTSx+VLr98ZpjsmZ+wj3nv013dY5/rVWl0vTIA2k7H5silW53pMSLgrclTGQSEoLC1cpme/LUlkW0mtaUl1TKaqbW/ebTwx7q96Pwy36uw89Ku0Cd7jMKJICWjOU1iu0rbb/2HXemxbE9Q2RLWjXNIJ/3Mjx0Xqs3uEFASYSSSSSnFNlz7kCBu/F8kYCekCFyLTWtqaX2WrAfwFJFAOj3UmMfJm7xR67lA+5YEAwrkTLjYtl0+acMX0xjGWFOvdRvklnMcRYAjcszu8JNSVS1XAj3jwkGWQd1KkfSVZb8OUyia0TpbF+rNRjycJRIiHMakIGeBULNGIpkr5e46iX1B+tGOwkG11FqsYlURCcHpIAhDa+Fo/onquh59MAlaRCDUNB00AejZMtANgxRhQBq6REg/vn3j+De+fm2lpIuHX7+1f0fBYN/1b/z03v/0+6/Bbrrc68G/tSg3556qgKdsS4jDDl77Gd879sJjA+8fP/fNv9mlAdi3LLeuDayuyAu8LQSCuUS99tUv9HvX1BersTcvR99+fZh5qaB5/95xn0TAMTs6PPrv/6vv3e9uFvF4+OB3/+3nvv7qZxaLB5g1LZi1xiZzawJxAtBjHwdr974VSVMIQzUyundvf+r9tmMgDn915p5LJVlWx4f53W/v5eyaiPki/97LC5tn1akejWzDV/cOZ2898OIFKaG8dHtwUHCI1+YJXTyZNw8mOdzet2VtG4U6YLh7OE/NKofOc1FFggNsnsv+u2/k26XvDcdH/jt/m94tcgXfUpeePNDHAKkx2GInpAcDRKZBsZJmjJZ7Nhrnu4lZMPqePTgHzl6YVulU8ZgVmnVpS0dGHZeF1bSUXfjD3xaPlQRXQ9amFQ6CvXk6VgVRnG5jOY5VOdvZ2dnrrSdptD6VFEzaxOy8SBwwAeiiIRfAFI8rF8ugDwNZUDqSKF0gs+/LvN9xOPodocNyiC67iorhiFowk0nLTZwpiiU6DFLNoWAQFAgJAQlDDJ0GGE9tj/8IZ8lkBpapcPQtETi0v6R+EUjBHTmHDVWLo6PV8RBBHB5lwjjb61eH1i/UcZV1AF2orky4LvUoz9XwQASk/Mxt7O4tCxksy8Xy7XsOFEjF/OD1n9+zexFe+ux/tvrN3XRbLErMh3rNl9Cp7q020BAKv7VnpNPWk8Sb47Jqp4wSVxema4T8zr6jFJZTTWyCdWXx9v0yVDdGHfp+9pvf6O/Pw6Vlnd08PD7449eHumQv3c17N148uOFJROqD3f0cU12cNBKf6vTqmN/88nUgAnTYm3dX/+hfrNJ3A1lo9/7Jd45/8kN4V1N3up3/9LmXiPcKF0vu2bDMSJzag0Mhj3zY+5UXShNREcAxCQSgFyrShhR5weWp1eGp/c+9zM/zlOsEkIqdnYPv/7jcP8Seaan57u3/6D/8Cq4TgzAv7/yP/2Txf/x/2NmR8nh+6/Vf/+13d/ZWxlnWQ5sHowMyHBgmAF3UXMqmmbFeakHNJIHWBOqRQ1iuWtkRtuv98zmTzdIqkVy+TyW1mmFFc9DWvuVEwXmWTGm1bmptEV9zHAOUVKPdGkdhT6HvDNPPdZ/rkrlZST62nMoA+jAAUjGhMySwWAz3YuWsCZt5zvZtz4zMuOv6oHTvzmbCqmTBWpKtyUbDmBZKnwD0kWeWCJPY9AhH4ksC3nSVXSQsKBOSzFZ+lxIJmFurT/Q27nXjVg7yxDvobHs61xSbJsUoxHlKrPMMFYk1pDYpQZ0SSB/zzKRy1IMuwAAEzcaM9bgRPCEPqSoNsITBBCfhYz4604KkoSYmAF2I9LQ5d2a0hSkw0Cr0oR0WjW+7gGxynOOem5NBzoscSaSstO2Yaz3ErRe2XlLnggErqnuMQsOWK5ND2tYsNhWTU0YyswOUuYSCYI0h/IGGG+J8nbbkZSuQXSIAJUBqAf3g+LgVKUrq8zt7u6em+do+9nGntkgxKdmWjgHBuhygFA3LrKudmUB86EyEZOK9v3pT944KHnaRNlOLqbw223v1021hhx7qRrV5MaSw5XTWcN80XcvE9ntb20U+5NHXXtErd/pIJHq3O7OuplGPkSH/ZQVQ05g8AA5yHA31zJcyd2dcLyKgxCImwWzFT5dVi9HprBFiFtQAGjDUjEymGA+tHGuzNA7o3nvQvXVA7/1RA8hERi5vZvkVG1wP8QXjyo0ERDoIT47rWklKjmi1maaDxmBtU/sERIeqFi/t++duX0cOMAdm42THRKIvfpA5x7WQJ72BeqIfRLRATKnI1uY1jtecOjcBOQNEsew7c89Nbm89K33y0Q+z7sPoiJQQIWVWIcAUlVBVtjM2FOMLGjsMNkBuA7f9ECllZrvVyLaqMC9nk9BlDOM3hasn185so2ASFC7b6ffRDQCzq6vlKhJnQJSEJ7gMrqo5zuijnlpzkhn1fPFhjMzMvd+5RgRS7KMzSYPlHCFPcNZrzjIkZ/1Q7BFHko/rL0m1BWdkCwubuMRlmwy7jADKtZOoY1b34u8YJYCZBcZiRtGXdfjDP/05TCvOMlZfegU37ngOs00/BQVvA1wv3M5uJjM/U8MfiXiTcQ7uIZmW3KwvlQDIjIuj5R/+2SGhTHOUF+7u35l3MvmsOLX63puceaaylOHByr0DULJtdW3rNijKR3rnhAbV+yuElBaEH10+InQVe6I/2v/0s15Mwbr57N5h+a//2zcGuzWUe7F48J//Z688//z1hRbb14FANe186UUTwujYSh6RoyjCOqZ31CGzC8A3XLkq4T6/+8Hx7/3e94f4dPXI1eF/8tK1L13/dA73ZdxbxtHv/4ukCCRtn3N1rqpHZZsFGbhMe/148aBDKrpaiY7OSyVl/0kE0Lhp3gHConB3Pnvefb8vx0sfrKwdyplSq5S5SoCJJLcANE6DbNLTbbf3Kfk6FUBAeMHO7m43XAt3FZg/AAIUkSzYzy6dEAhj2NIE+5BlQe3kShBFhdm2xca0dPdjYUxjkHsqWslR4E5puVj5nEqGRTC4rFLL8eHUkstx9S1PiNh5EtSWrDRPclIRk1ShTCiCsTJ1GvoGYlGNZo1gIaSEoQgAY5yrJzUOz2fzeym4BUeRPrWFZLx0e78/mR4I43oda6E7oaQTHTh0vfp+rgwazy5I/fCt2h+yX16Wyb5z72paTXSgxOAY2NvmcRtBGY1D8dRHZh+3sufUJDD1i8tyAzC//g//4d0/+KfvZxr5zAYK1nV9rY41xE3jQBWSdTXU5XHEci3FyjbyGhBmpSufhDf/Co42s23ANsiCCVgwYG2U82TBAIGEQeMtlCETnL32w3lVfbbHgBRAgnT0Np+jDJAxoayKIXMMxYNIJMBU9CjgKH6X5sm2Jcg2/mb0XhOAPoazSUEMZqID9NwJLolkFRhbpDQNKZhYYWHIhCSVmTras/7Fc33kJJSQJ0JrtRc/OY1yrKe0zLonKks6WJLS1WxsvXoAasShpEwr6QgkNVidcb5DO8ZWescAmCsSKTjBgNosM8j6TD3QCYkyFAAGk6KpuDjHOvEJy6JbAjEg5oEh64pmF5+ongD0dB92skt54vDmSz+rcrk4xLI/vi+NMToByEHRhR/DxQ5wqfAkg6ILw3W88yb9wkfeDQLXpyPN/CfR/0nuWd1hk7dHAkEwEjefu9nfcAx9lMMPZrsPk0LHtCvj4/A/ClqvvN/jB69+5Yd/41e7gPX44Of3/+Qfv1G0uxEmq4QJfai6D10Bj7ebKC44g7oe/zO0U4djleRDGVrb+xoq+f8srv+/dXcz6yi0mqothoOvffpTL37ppVis0jW4qvqm44pxr0PrRanT0t2PJe+TxO6AlfNe77MBLLjXdQfz6wX7wLgKvi3AOCKYZkkqCjKe5NnahBoTahWPi6SBTegzw8rBvBe6TRhIgrRlsQ/6MuuR0be2NMNGDW+N05Y6vPT7U68cgGjA4K2zSkXpEmWeZlmdiw0faYm+Mv6b0fQJH0conhTUkQKXgLnK2r1czFWq1yg1PmwFAE36LjxUVCM9baCKAUnJ2pxqCyQD6p9CH3gC0DnqPGAV9W6X8yVXSe3GTlEfSGeaYMm0AsWG2J4qReijm2rWPYxR0kKdxfGiMyY8+ywAUBJ5sUlkAasWkotbo2Yto2gQ0hjw8AwalIgHXm3lq6yHMewDBuvQVuFd7lj+agCoLY9/7lr5N3/zlqigC/ndvzz86dGusVvvezpVluQpIkpc9DoIRAC3uPh7Nw57vkOlyb+16L6PW0BrLb1gBKftZ38YPW41DuyVxW9/dbZrHOjMa8/vFQC8IhOrVwRAEKCd+eyV+Wz8ivlXfzUISctn/RFlRbdrD37bf3BzeVwJevd6ff41uyODUJ/ZZRWgJI+6svjiS8/tnFwRA04vBJ8A9MS4oaC06qpAlwYFGAxPb8MYLlSTCSYzswFID0t4Pj57aKGZmgJR2Cp8lW1GRBz35gzjPu5n8quBFIW5ZWIFdWhL60mAbXs8KpGESckJQI/9+aQhzUSiAwtGOUIApI8F+HHZOgK1rqqjT5g4oER7xJM9r6iS6UqwDaSJyFE/Ed4Ge57e+YxcG0bIKdJGRDWRoZQn5vIiO758Gw6uggeiAD+oCg0JmGSe11tL8+kadiZKz+c+V4q8wundwXtDPcLTVEt/IexDxAAdRwyppot+LCzb5Ml0hD0Bfqr7D+ugSBEZecPsb+5d6xBtAijbIIwhQ7vX51/7u18UBaZZ96f/+If3DmGn59UfM/djAIlcv0Vtdf1TTvexbZUHvLX1nAx2jCvDYcJ7i+WbmWnWBI2jFAN4WQUTLzmJVu0AmCVUzMN9oywoxEhM1IY4ljE0GWjzUD6Nw9d6KQtM4wSzSRTbPtaniCWxXrrjlG0Pv47wATu50WjI0uZjq0m4xHKblz4K0yO/MNHRgl0HyPHDraeWHzTAxWGcRsyBPjPQBUsknzw3TCbQ+toWeFSMJUg50ixNUdizpgjYSurkUHO5lKdQRcBnFPksNpRQSdTiM8Q8vXopyfIUC28FUNKqLgCnchXHiRvbQ/vb6SKhubvUVdDQveQA4qj8JRDZmphJV5Fq/taXd74aQcFNPztc/dEPBtj+emPhqQzk4/kfyVh/6jd+bzWf1ZfCFqX2b/j1oBkinoCMGDlYv4svfuMlFXogdGPnhfmQK7pHMGhhBhgpEdUsJUsP4PJLRV/JrkoCpH/qzt76Q2xdr2/HKtySTxtjJxnsM8p3Y0dWLQaLHqU44gkVw+QASqm3P3Ndc7MUkhEZGRuVemHaF/bXwoU23t6doWjqPsVQqwO+aRMbtbpPJ3PXekD48JyKiZaWvpihMoswp9nwRMxnlCAyNUX91RBpsoRBRhFFaFPzV1hm87JHYc2Ht06atLomIgLgNNDVvmcQEjBIYKjWunKXtwaddg4kVVGLd2Yn4T2ZJ1xkzEQrWVOG7EG0GZ7GbB/rSJFRITVF0FqHmoVNw1My5kqBY5oiGVEzBSVoE4A+LnMhxfdrLYowmXDdu8785FATJJOFwBsv7rqHlbHNpoEwyYH90fs1F2tR5kekDNdKB0+TVqQy92+XfseZZHi3t948TmbG89cX13cyYMqy25sZrsRmjKsKIEGiHVB/uTy0LNVYKn9tF7d6tXbndZimMLHy87/2GXk0z0MZ6riCyc3/7Fuv338z3NcCUfpYhCwJZBx+4SufefGLN46GaH09S1TISdNw+LdeWb368q1sdTfsKFNtX/Ak8/sx0eaWypN5NYRlnwrrMIqJKZq8DsMTgK1YRyU6iJmREIzSqqTkTAq+PsW4zgs01TxrIfeFGI4cVh/aIERC8CF1nKoZQFIw26SqbEiTUOUdDYKMV2KI5+p6IIQ1d9JoZ4vqT6gx2xoMdAUVbMpljW4gyUEwso8gsiALspUmzrDndQPjRdt9yKan2ZEVLfpbY9KATjCBDJlVFQeItLbYB0l1ZDHFuOrjygZiV344UgJkQ+Qy7+eQjtJAFTZuNbVEyR6juI4Pg4YQYjW2p2psoBBkNqd1QOBiNa+kAGQeRdZ17+MY4zk51FUoAYdEWWKZdUURsKyLIgdkCPJqX4IrN5UxkuJcK/iSQubLe93vfn0fZtoKZCQUs/ce1D/6wWHavgSZvvDrz+ffWGueCk0oTGAh3/je+wd3h1KKlBfjIh65+MKXd669MKuhtkN1rWHPCOw919eoRlfWnfnxb7062yUAU157cV9Swhxnxa5O/sS0M/XjOMvaaESl1owzRezszL+0Mz9935ZRtN2d+i/fOKZ2miTU/svXOI5oUWm1tgOrzJw//uE9paBCrj4y8lJr1Q/sP7//3Bf3VqvKtjmu1R8EWkakEmRCuWv+5Rf7HgIKMNua4Dkd/a1jhrEbQFMm+uMEk9Yzf+NpdO50I5VVrpIsspRFDUhm7axJRLTs4tKsg8YdvdJFjjCRTihqDm3VBbU14zwuh2ebBoEr63LIrqxHVHlq51xbn5cESWuVMMLzCpRTr+be+KZLN+6SODk1zoXSrRbGYVC1bH2v7gADJOQgSQeyZQuHyGFIPHRG9NxxIiChukplEy8cHxg5PnodcjU59BjyGCykn20WkEY4QSaCcG60rjENFj57q5Ye6bJ7CgyZQFJz8Jp3jm0p3zbVwM74hTvHg5mJnfD2YTmo8wKKgVGticU6ANdf8M4x8xobuJyuzJ7DVEaV7ygijRRUuuVn9oemr9oxRy0oYpV5o18W3DxPz0MxBA5ryM2EanhAIVlq6iGfistHSv/g6MHVApAlWjUglJ4CGYjngr+6f3Oms1rQElJLGIhiqIL973/0wevv7ndlozTfVgrIkF1b385hQ6+4/nHnRVkFpQ3MPgOZcmONvLH34N//nRu77SxTv773qqJAZko7LbkvYEA9rHjt4P7RRj2Y3AhJnV6ZN3mgZ2Fho2AqaE2waWkcYPawyImEsW8KyxWtNzTBAMrWgs22V9kWavrl2xLim5+YZ0oNBDh0g6fDqUZaRJAhkInCdV+AUEgQsnOlLkKd0MtoMxJpAuBxlXJCV5VEt4Cn5RI95SkRaXlejp4iRKPGVe4iW9l0s/mgLYijiODZ7uPcJs0b57NOYJu3hSomIVsFjQq5SZbWOraRKu0pcivQ2lZcBFAtotFnIO1q9CJeVQCdX+rdBoaDsIcIUGpreVPzEOExrIfmt3GGh55WD+fwmx+n9XMgE6SqNQINprxtr1rrTPNhT8A2MG3Cqe6Tq1PUuHoc6DyeKtAJt5OWGRsZSwJACjuGz+3tzZPVamJ179CW1Wk6q7B5ceSegfB6h1RbgfHCDuBOGci3jxfvDUM6N7IKJ884JnwQykweFgu/kl1BV7+UARhRzd5FJpWnO8gE7lu+SHUmqhD2/DU/9f1n+mEXgBgEaz/6PvLtgrD1np6HhFRKoJSWfNJUTP0FxWUCM5MgrZzJ6gpFNgu26Tz3ohgTL+N6+od14Wy2qT4BgNJL+1eb2ZfT18g5z8wJAt6yoLyab/4nTeb3hMpseSKjG9XmBMk1Zgg+YnyeZ06rx3l2qycFLQMtTtoMtxGpi/CtCUC/KIq9bQP4flbPhLgdovGRDzo7irbNeR7Cf7b+YRuVewLGY6y58TkCDn5C3vBPAoC0FWKfbLRY/3WM/MHi2BKLglLzBBaCC/lsQ+a1wiYFT4RTxoCIT6x98pXqRVRnG15VdNvsowlZgnkuvefbKYLHgvJmffOqC6rF6J+Eo+qXF0CbDLVLaXX7YjuQzHNpX9HWkNLjqSnwVCWWIgaCn5zz6pcSQOC2ezi1/73lHk1nOc0GA3rMQWkBwTNx1icZPfilWbbySJJ9hs/qLI3mUz4BP+lv6C8bgM5aPsxH2KVXZ54AdGk80sM3DHBCxgSgJz3VfhkOnmcYo0xvwWQTgCabADTZBKDJJgBNNtkEoMkmAE02AWiyCUCTTTYBaLIJQJNNAJpsAtBkk00AmmwC0GQTgCabADTZZBOAJpsANNkEoMkmAE02AWiyySYATTYBaLIJQJNNAJpssglAk00AmmwC0GQTgCabbALQZBOAJpsANNkny/5/1d/TSGKtUiQAAAAASUVORK5CYII=">
+<link rel="manifest" href="manifest.json">
+<style>
+
+:root{
+  --bg:#F5F3EF;--sf:#FFFFFF;--bd:#E8E4DC;--bd2:#D4CFC5;
+  --nv:#1B2B4B;--bl:#2D52A0;--bl2:#4A7AC7;
+  --tx:#1B2B4B;--tx2:#5A6478;--tx3:#9BA3AF;
+  --ibg:#EBF0FB;--ibd:#C3D4F0;--itx:#2D52A0;
+  --sbg:#EDF7F0;--sbd:#B8DDD0;--stx:#2E7D5E;
+  --wbg:#FFF4EB;--wtx:#A07020;--sec:#F0EDE8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;min-height:100vh}
+#app{max-width:500px;margin:0 auto;padding-bottom:16px}
+.hdr{background:var(--sf);border-bottom:.5px solid var(--bd);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:9}
+.hdr h1{font-size:16px;font-weight:500;color:var(--nv)}
+.hdr p{font-size:11px;color:var(--tx2);margin-top:1px}
+#ct{padding:12px}
+.nav{background:var(--sf);border-top:.5px solid var(--bd);display:flex;padding:6px 0 max(10px,env(safe-area-inset-bottom));position:sticky;bottom:0}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;font-family:inherit;color:var(--tx2);font-size:9px;-webkit-tap-highlight-color:transparent}
+.nb.on{color:var(--bl)}
+.ic{font-size:15px;padding:2px 8px;border-radius:5px;display:block}
+.nb.on .ic{background:var(--ibg)}
+.card{background:var(--sf);border:.5px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:9px;box-shadow:0 1px 3px rgba(27,43,75,.05)}
+.lbl{font-size:10px;font-weight:500;color:var(--tx2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;display:block}
+textarea,input[type=text]{width:100%;background:var(--sec);border:.5px solid var(--bd);border-radius:7px;padding:8px 10px;color:var(--tx);font-family:inherit;font-size:13px;outline:none;resize:vertical;line-height:1.6;-webkit-appearance:none}
+input[type=range]{width:100%;border:none;background:none;accent-color:var(--bl)}
+.btn{padding:9px 14px;border-radius:7px;border:none;background:var(--bl);color:#fff;font-weight:500;font-size:12px;cursor:pointer;font-family:inherit}
+.btn.w{width:100%;padding:11px;display:block}
+.btn.g{background:none;border:.5px solid var(--bd);color:var(--tx2)}
+.btn.s{padding:6px 10px;font-size:11px}
+.tabs{display:flex;border-bottom:.5px solid var(--bd);margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{flex:1;min-width:max-content;padding:8px 8px;border:none;background:none;cursor:pointer;font-size:11px;color:var(--tx2);font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab.on{color:var(--bl);border-bottom-color:var(--bl)}
+.hint{font-size:11px;color:var(--tx2);line-height:1.5;margin-bottom:7px;display:block}
+.chip{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--ibg);color:var(--itx)}
+.chip.g{background:var(--sbg);color:var(--stx)}
+.chip.n{background:var(--sec);color:var(--tx2)}
+.pb{height:4px;background:var(--sec);border-radius:4px;overflow:hidden;margin-top:5px}
+.pf{height:100%;background:var(--bl);border-radius:4px}
+.fb{background:var(--sec);border-radius:7px;padding:9px 11px;margin-bottom:7px}
+.sg2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.sp{background:var(--sf);border:.5px solid var(--bd);border-radius:9px;padding:9px 10px;position:relative;min-height:50px}
+.sc4{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.sc4 .si{background:var(--sec);border-radius:8px;padding:9px 11px;text-align:center}
+
+</style>
+</head>
+<body>
+<div id="app">
+<div class="hdr"><div><h1 id="H">个人总览</h1><p id="D"></p></div><div style="display:flex;align-items:center;gap:8px">
+<label title="导入数据" style="width:28px;height:28px;border-radius:7px;background:var(--sec);border:.5px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer" title="导入备份">↑<input type="file" accept=".json" style="display:none" onchange="importData(this)"></label>
+<button onclick="exportData()" title="导出数据" style="width:28px;height:28px;border-radius:7px;background:var(--sec);border:.5px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:var(--tx)">↓</button>
+<div style="width:28px;height:28px;border-radius:7px;background:var(--nv);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff">✦</div>
+</div></div>
+<div id="ct"></div>
+<nav class="nav">
+<button class="nb on" id="n0" onclick="go(0)"><span class="ic">◉</span><span>个人</span></button>
+<button class="nb" id="n1" onclick="go(1)"><span class="ic">✓</span><span>记录</span></button>
+<button class="nb" id="n2" onclick="go(2)"><span class="ic">✦</span><span>想法</span></button>
+<button class="nb" id="n3" onclick="go(3)"><span class="ic">◈</span><span>三观</span></button>
+<button class="nb" id="n4" onclick="go(4)"><span class="ic">⊕</span><span>收集</span></button>
+</nav>
+</div>
+<script>
+
+var $=function(id){return document.getElementById(id)};
+var ld=function(k,f){try{var v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}};
+var sv=function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+var ee=function(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
+var td=function(){return new Date().toISOString().split('T')[0]};
+$('D').textContent=new Date().toLocaleDateString('zh-CN',{month:'long',day:'numeric',weekday:'short'});
+var PAGES=['个人总览','记录','想法','三观','收集'];
+function go(i){
+  $('H').textContent=PAGES[i];
+  for(var j=0;j<5;j++){var b=$('n'+j);if(b)b.className='nb'+(j===i?' on':'');}
+  $('ct').innerHTML='';
+  [pMe,pRec,pIdeas,pViews,pCol][i]();
+}
+window.xp=function(id,btn,o,c){var el=$(id);if(!el)return;var s=el.style.display==='none';el.style.display=s?'block':'none';if(btn)btn.textContent=s?c:o};
+
+var mT='skill',sK=null,mA=false;
+var SKL=[['exec','执行力','能启动、能完成','你能否在没有外部压力下自主启动并完成任务？'],
+         ['comm','表达力','说清楚、写清楚','你能否清晰地把想法传达给别人？'],
+         ['fin','财商','理解钱的逻辑','你对财务、投资、财富积累的理解程度？'],
+         ['soc','社交智慧','读懂人、处好关系','你在不同场合读懂他人意图并建立关系的能力？'],
+         ['learn','学习力','吸收新知识','你能否快速理解新领域知识并实际应用？'],
+         ['stress','抗压力','扛住后反弹','你在高压、挫折时保持状态的能力？']];
+var WLD=[['edu','学历分位','e.g. 全球前5%大学'],['income','收入分位','参考所在国分布'],['lang','语言能力','e.g. 中英双语'],['network','人脉资源','行业前辈、海外导师'],['skill','核心竞争力','e.g. 数据分析+精算'],['location','地理优势','e.g. 伦敦→国际视野']];
+window.meSw=function(t){mT=t;sK=null;mA=false;pMe()};
+window.ckSk=function(id){sK=sK===id?null:id;mA=false;pMe()};
+window.sP=function(f,v){var p=ld('os_p',{});p[f]=v;sv('os_p',p)};
+window.sSk=function(id,v){var sk=ld('os_sk',{exec:5,comm:5,fin:5,soc:5,learn:5,stress:5});sk[id]=v;sv('os_sk',sk);var el=$('sv'+id);if(el)el.innerHTML=v+'<span style="font-size:10px;color:var(--tx2)">/10</span>'};
+window.sWld=function(id,v){var w=ld('os_wld',{});w[id]=v;sv('os_wld',w)};
+window.aFile=function(){var n=$('fn');var fc=$('fc');if(!n||!fc||!n.value.trim()||!fc.value.trim())return;var f=ld('os_files',[]);f.unshift({name:n.value.trim(),content:fc.value.trim(),date:td()});sv('os_files',f);pMe()};
+window.upFile=function(inp){var file=inp.files[0];if(!file)return;var r=new FileReader();r.onload=function(ev){var f=ld('os_files',[]);f.unshift({name:file.name,content:ev.target.result,date:td()});sv('os_files',f);pMe()};r.readAsText(file,'UTF-8')};
+window.dFile=function(i){var f=ld('os_files',[]);f.splice(i,1);sv('os_files',f);pMe()};
+window.sSkN=function(id,v){var n=ld('os_skn',{});n[id]=v;sv('os_skn',n)};
+
+function pMe(){
+  var p=ld('os_p',{});var sk=ld('os_sk',{exec:5,comm:5,fin:5,soc:5,learn:5,stress:5});
+  var wld=ld('os_wld',{});var files=ld('os_files',[]);
+  var tabs='<div class="tabs"><button class="tab '+(mT==='skill'?'on':'')+'" onclick="meSw(\'skill\')">◎ 能力</button><button class="tab '+(mT==='info'?'on':'')+'" onclick="meSw(\'info\')">◉ 基本信息</button><button class="tab '+(mT==='world'?'on':'')+'" onclick="meSw(\'world\')">🌐 世界定位</button><button class="tab '+(mT==='files'?'on':'')+'" onclick="meSw(\'files\')">📁 文件</button></div>';
+  var h=tabs;
+  if(mT==='skill'){
+    var cx=140,cy=140,r=100;
+    var pts=SKL.map(function(s,i){var a=(i/6)*2*Math.PI-Math.PI/2,rt=(sk[s[0]]||5)/10;return{x:cx+r*rt*Math.cos(a),y:cy+r*rt*Math.sin(a),lx:cx+(r+32)*Math.cos(a),ly:cy+(r+32)*Math.sin(a),n:s[1],id:s[0]}});
+    var grd=[.25,.5,.75,1].map(function(rt){return SKL.map(function(_,i){var a=(i/6)*2*Math.PI-Math.PI/2;return(cx+r*rt*Math.cos(a))+','+(cy+r*rt*Math.sin(a))}).join(' ')});
+    h+='<div class="card">';
+    if(p.name)h+='<div style="margin-bottom:10px"><div style="font-size:15px;font-weight:500">'+ee(p.name)+'</div>'+(p.tagline?'<div style="font-size:12px;color:var(--tx2);margin-top:2px">'+ee(p.tagline)+'</div>':'')+'</div>';
+    h+='<div style="font-size:11px;color:var(--tx2);margin-bottom:8px">点击技能名称查看详情</div>';
+    h+='<div style="display:flex;justify-content:center"><svg width="280" height="280" viewBox="0 0 280 280">';
+    grd.forEach(function(g){h+='<polygon points="'+g+'" fill="none" stroke="#E8E4DC" stroke-width="1"/>'});
+    SKL.forEach(function(_,i){var a=(i/6)*2*Math.PI-Math.PI/2;h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+r*Math.cos(a))+'" y2="'+(cy+r*Math.sin(a))+'" stroke="#E8E4DC" stroke-width="1"/>'});
+    h+='<polygon points="'+pts.map(function(pt){return pt.x+','+pt.y}).join(' ')+'" fill="rgba(45,82,160,.12)" stroke="#2D52A0" stroke-width="2"/>';
+    pts.forEach(function(pt){var sel=sK===pt.id;h+='<circle cx="'+pt.x+'" cy="'+pt.y+'" r="4" fill="#2D52A0"/><text x="'+pt.lx+'" y="'+pt.ly+'" fill="'+(sel?'#2D52A0':'#5A6478')+'" font-size="12" font-weight="'+(sel?600:400)+'" text-anchor="middle" dominant-baseline="middle" style="cursor:pointer" onclick="ckSk(\''+pt.id+'\')">'+pt.n+'</text>'});
+    h+='</svg></div><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:10px">';
+    SKL.forEach(function(s){h+='<div style="text-align:center;cursor:pointer" onclick="ckSk(\''+s[0]+'\')"><div style="font-size:9px;color:var(--tx2)">'+s[1]+'</div><div style="font-size:14px;font-weight:500;color:var(--bl)">'+(sk[s[0]]||5)+'</div></div>'});
+    h+='</div><div style="display:flex;justify-content:center;margin-top:11px"><button class="btn s" onclick="mA=!mA;sK=null;pMe()">'+(mA?'收起':'📊 开始自我评估')+'</button></div></div>';
+    if(sK){var sd=SKL.filter(function(x){return x[0]===sK})[0];if(sd){var ns=ld('os_skn',{});h+='<div style="background:var(--ibg);border:.5px solid var(--ibd);border-radius:10px;padding:13px 15px;margin-bottom:9px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div><div style="font-size:15px;font-weight:500;color:var(--bl)">'+sd[1]+'</div><div style="font-size:11px;color:var(--bl2);margin-top:2px">'+sd[2]+'</div></div><div style="font-size:22px;font-weight:500;color:var(--bl)" id="sv'+sd[0]+'">'+(sk[sd[0]]||5)+'<span style="font-size:11px;color:var(--tx2)">/10</span></div></div><div style="font-size:12px;color:var(--bl2);line-height:1.6;margin-bottom:10px">'+sd[3]+'</div><input type="range" min="1" max="10" value="'+(sk[sd[0]]||5)+'" oninput="sSk(\''+sd[0]+'\',+this.value)"><textarea rows="2" placeholder="备注：现状、想提升的方向……" oninput="sSkN(\''+sd[0]+'\',this.value)" style="margin-top:8px">'+ee(ns[sd[0]]||'')+'</textarea></div>';}}
+    if(mA){h+='<div class="card"><span class="lbl">📊 六维自我评估</span>';SKL.forEach(function(s){h+='<div style="background:var(--sec);border-radius:9px;padding:10px 12px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px"><div><div style="font-size:13px;font-weight:500">'+s[1]+'</div><div style="font-size:11px;color:var(--tx2)">'+s[3]+'</div></div><span style="font-size:16px;font-weight:500;color:var(--bl)" id="sv'+s[0]+'">'+(sk[s[0]]||5)+'<span style="font-size:10px;color:var(--tx2)">/10</span></span></div><input type="range" min="1" max="10" value="'+(sk[s[0]]||5)+'" oninput="sSk(\''+s[0]+'\',+this.value)"></div>'});h+='</div>';}
+  }
+  if(mT==='info'){h+='<div class="card"><span class="lbl">姓名/ID</span><input type="text" value="'+ee(p.name||'')+'" placeholder="你叫什么" oninput="sP(\'name\',this.value)" style="font-size:15px;font-weight:500;margin-bottom:7px"><input type="text" value="'+ee(p.tagline||'')+'" placeholder="用一句话描述现在的你" oninput="sP(\'tagline\',this.value)"></div><div class="card"><span class="lbl">当前人生阶段</span><input type="text" value="'+ee(p.phase||'')+'" placeholder="e.g. LSE Year 1" oninput="sP(\'phase\',this.value)" style="margin-top:5px"></div><div class="card"><span class="lbl">正式简历摘要</span><textarea rows="5" placeholder="教育经历、实习、社团……" oninput="sP(\'bio\',this.value)" style="margin-top:5px">'+ee(p.bio||'')+'</textarea></div><div class="card" style="border-style:dashed"><span class="lbl">🔒 非标版（私密）</span><span class="hint">只有你自己看</span><textarea rows="3" placeholder="失败的事、真实动机……" oninput="sP(\'unlisted\',this.value)">'+ee(p.unlisted||'')+'</textarea></div>';}
+  if(mT==='world'){var wf=WLD.filter(function(w){return wld[w[0]]&&wld[w[0]].trim()}).length;h+='<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="lbl" style="margin:0">完善度</span><span style="font-size:11px;color:var(--bl);font-weight:500">'+wf+'/'+WLD.length+'</span></div><div class="pb"><div class="pf" style="width:'+Math.round(wf/WLD.length*100)+'%"></div></div></div>';WLD.forEach(function(w){h+='<div class="card" style="margin-bottom:7px"><span class="lbl">'+w[1]+'</span><span class="hint">'+w[2]+'</span><input type="text" value="'+ee(wld[w[0]]||'')+'" placeholder="填写实际情况" oninput="sWld(\''+w[0]+'\',this.value)"></div>'});}
+  if(mT==='files'){h+='<div class="card"><span class="lbl">添加文件</span><input type="text" id="fn" placeholder="文件名称 e.g. CV 2025" style="margin-bottom:7px"><textarea rows="4" id="fc" placeholder="粘贴文件内容……"></textarea><div style="display:flex;gap:7px;margin-top:8px"><button class="btn" onclick="aFile()">+ 保存</button><label style="flex:1;padding:9px;border-radius:7px;border:.5px solid var(--bd);text-align:center;cursor:pointer;font-size:11px;color:var(--tx2)">📁 上传文本<input type="file" accept=".txt,.md" style="display:none" onchange="upFile(this)"></label></div></div>';if(!files.length)h+='<p style="text-align:center;color:var(--tx2);padding:18px 0;font-size:12px">还没有文件</p>';files.forEach(function(f,i){h+='<div class="card" style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:13px;font-weight:500">📄 '+ee(f.name)+'</div><div style="font-size:10px;color:var(--tx2)">'+f.date+' · '+f.content.length+'字</div></div><button onclick="dFile('+i+')" style="background:none;border:none;cursor:pointer;color:var(--tx2)">✕</button></div><button onclick="xp(\'ff'+i+'\',this,\'展开\',\'收起\')" style="background:none;border:none;cursor:pointer;color:var(--bl);font-size:11px;margin-top:6px">展开</button><div id="ff'+i+'" style="display:none;margin-top:7px;background:var(--sec);border-radius:7px;padding:9px;font-size:11px;line-height:1.6;max-height:150px;overflow-y:auto;white-space:pre-wrap">'+ee(f.content.slice(0,600))+'</div></div>'});}
+  $('ct').innerHTML=h;
+}
+
+var rT='am';
+window.rSw=function(t){rT=t;pRec()};
+window.sR=function(f,v){var tk=td();var all=ld('os_rec',{});if(!all[tk])all[tk]={};all[tk][f]=v;sv('os_rec',all)};
+window.sSc=function(f,v){var tk=td();var all=ld('os_rec',{});if(!all[tk])all[tk]={};all[tk][f]=+v;sv('os_rec',all);var el=$('sc'+f);if(el)el.textContent=v};
+var rAI=false;
+window.doAI=function(){
+  var tk=td();var d=ld('os_rec',{})[tk]||{};
+  if(!d.done&&!d.t1)return;
+  rAI=true;pRec();
+  var msg='今日3件事：'+[d.t1,d.t2,d.t3].filter(Boolean).join('、')+'\n完成：'+(d.done||'')+'\n不足：'+(d.bad||'')+'\n学到：'+(d.learn||'')+'\n总体：'+(d.st||5)+'/10\n\n请给：①一句真诚点评②明日最该改进1件事③一个值得思考的问题。换行分段，80字内。';
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:msg}]})})
+  .then(function(r){return r.json()})
+  .then(function(data){var t2=ld('os_rec',{});if(!t2[tk])t2[tk]={};t2[tk].ai=(data.content&&data.content[0]&&data.content[0].text)||'失败';sv('os_rec',t2);rAI=false;pRec()})
+  .catch(function(){var t3=ld('os_rec',{});if(!t3[tk])t3[tk]={};t3[tk].ai='连接失败';sv('os_rec',t3);rAI=false;pRec()});
+};
+
+function pRec(){
+  var tk=td();var all=ld('os_rec',{});var d=all[tk]||{};
+  var h='<div class="tabs"><button class="tab '+(rT==='am'?'on':'')+'" onclick="rSw(\'am\')">☀ 早间</button><button class="tab '+(rT==='pm'?'on':'')+'" onclick="rSw(\'pm\')">🌙 晚间复盘</button><button class="tab '+(rT==='q'?'on':'')+'" onclick="rSw(\'q\')">⚡ 极简版</button><button class="tab '+(rT==='h'?'on':'')+'" onclick="rSw(\'h\')">▤ 历史</button></div>';
+  if(rT==='am'){h+='<div class="card"><span class="lbl">📋 今日最重要的3件事</span><input type="text" value="'+ee(d.t1||'')+'" placeholder="① 最重要的一件事" oninput="sR(\'t1\',this.value)" style="margin-top:6px;margin-bottom:6px"><input type="text" value="'+ee(d.t2||'')+'" placeholder="② 第二件事" oninput="sR(\'t2\',this.value)" style="margin-bottom:6px"><input type="text" value="'+ee(d.t3||'')+'" placeholder="③ 第三件事" oninput="sR(\'t3\',this.value)"></div><div class="card"><span class="lbl">避坑提醒/微习惯</span><textarea rows="2" placeholder="e.g. 不要一开始就刷手机……" oninput="sR(\'avoid\',this.value)" style="margin-top:5px">'+ee(d.avoid||'')+'</textarea></div>'+(d.t1?'<div class="card" style="background:var(--ibg);border:none"><span class="hint" style="margin:0;color:var(--bl)">目标已设定，去做就好，晚上再来复盘。</span></div>':'');}
+  if(rT==='pm'){
+    if(d.t1)h+='<div class="card" style="background:var(--sec);border:none"><span class="lbl" style="margin-bottom:4px">今日3件事</span>'+[d.t1,d.t2,d.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:3px 0">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')+'</div>';
+    h+='<div class="card"><span class="lbl">① 今日完成</span><span class="hint">实际完成情况</span><textarea rows="3" placeholder="实际完成了什么……" oninput="sR(\'done\',this.value)" style="margin-bottom:7px">'+ee(d.done||'')+'</textarea><span class="hint">额外完成/意外收获</span><textarea rows="2" placeholder="超预期的事……" oninput="sR(\'bonus\',this.value)">'+ee(d.bonus||'')+'</textarea></div>'
+      +'<div class="card"><span class="lbl">② 问题与不足</span><span class="hint">做得不够好的地方</span><textarea rows="2" oninput="sR(\'bad\',this.value)" style="margin-bottom:7px">'+ee(d.bad||'')+'</textarea><span class="hint">浪费时间/拖延的点</span><textarea rows="2" oninput="sR(\'delay\',this.value)" style="margin-bottom:7px">'+ee(d.delay||'')+'</textarea><span class="hint">情绪/状态问题</span><textarea rows="2" oninput="sR(\'moodN\',this.value)">'+ee(d.moodN||'')+'</textarea></div>'
+      +'<div class="card"><span class="lbl">③ 今日反思</span><span class="hint">今天学到了什么？</span><textarea rows="2" oninput="sR(\'learn\',this.value)" style="margin-bottom:7px">'+ee(d.learn||'')+'</textarea><span class="hint">哪个决定做对了/做错了？</span><textarea rows="2" oninput="sR(\'dec\',this.value)" style="margin-bottom:7px">'+ee(d.dec||'')+'</textarea><span class="hint">如果重来一天，我会改什么？</span><textarea rows="2" oninput="sR(\'redo\',this.value)">'+ee(d.redo||'')+'</textarea></div>'
+      +'<div class="card"><span class="lbl">④ 明日计划</span><input type="text" value="'+ee(d.m1||'')+'" placeholder="① 明日最重要的事" oninput="sR(\'m1\',this.value)" style="margin-top:5px;margin-bottom:6px"><input type="text" value="'+ee(d.m2||'')+'" placeholder="② 第二件事" oninput="sR(\'m2\',this.value)" style="margin-bottom:6px"><input type="text" value="'+ee(d.m3||'')+'" placeholder="③ 第三件事" oninput="sR(\'m3\',this.value)"></div>'
+      +'<div class="card"><span class="lbl">⑤ 今日评分</span><div class="sc4">'+[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){return'<div class="si"><div style="font-size:11px;color:var(--tx2);margin-bottom:4px">'+s[1]+'</div><div style="font-size:18px;font-weight:500;color:var(--bl)"><span id="sc'+s[0]+'">'+(d[s[0]]||5)+'</span><span style="font-size:10px;color:var(--tx2)">/10</span></div><input type="range" min="1" max="10" value="'+(d[s[0]]||5)+'" oninput="sSc(\''+s[0]+'\',this.value)" style="margin-top:4px"></div>'}).join('')+'</div></div>'
+      +'<button class="btn w" onclick="doAI()" '+(rAI||(!d.done&&!d.t1)?'disabled':'')+' style="opacity:'+(rAI||(!d.done&&!d.t1)?'.4':'1')+'">'+(rAI?'AI 分析中…':'✦ AI 总结今日')+'</button>';
+    if(d.ai)h+='<div style="background:var(--sbg);border:.5px solid var(--sbd);border-radius:9px;padding:11px 13px;margin-top:9px"><span class="lbl" style="color:var(--stx)">AI 复盘</span><p style="font-size:13px;color:var(--stx);line-height:1.75;margin-top:6px;white-space:pre-line">'+ee(d.ai)+'</p></div>';
+  }
+  if(rT==='q'){h+='<div class="card" style="background:var(--ibg);border-color:var(--ibd);margin-bottom:11px"><span class="hint" style="color:var(--itx);margin:0">⚡ 忙碌的日子用这个，5分钟搞定。</span></div>';[['kw','今日关键词','一两个词'],['high','高光时刻','今天最好的那一刻'],['low','踩坑时刻','今天最糟糕的那一刻'],['fix','明日改进','明天只改一件事'],['q','一句话总结','用一句话概括今天']].forEach(function(f){h+='<div class="card"><span class="lbl">'+f[1]+'</span><input type="text" value="'+ee(d[f[0]]||'')+'" placeholder="'+f[2]+'……" oninput="sR(\''+f[0]+'\',this.value)" style="margin-top:5px"></div>'});}
+  if(rT==='h'){var en=Object.entries(all).filter(function(x){return x[0]!==tk}).sort(function(a,b){return b[0].localeCompare(a[0])}).slice(0,12);if(!en.length)h+='<p style="text-align:center;color:var(--tx2);padding:40px 0;font-size:12px">还没有历史记录</p>';en.forEach(function(entry){var date=entry[0];var dd=entry[1];h+='<div class="card" style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="xp(\'rh'+date+'\',this,\'▼\',\'▲\')"><span style="font-size:13px;font-weight:500">'+date+'</span><div style="display:flex;align-items:center;gap:7px">'+(dd.st?'<span class="chip '+(dd.st>=7?'g':dd.st>=4?'':'n')+'">'+dd.st+'/10</span>':'')+'<span style="font-size:10px;color:var(--tx2)">▼</span></div></div><div id="rh'+date+'" style="display:none;margin-top:8px">'+([dd.t1,dd.t2,dd.t3].filter(Boolean).length?'<div style="font-size:12px;font-weight:500;margin-bottom:5px">'+[dd.t1,dd.t2,dd.t3].filter(Boolean).map(function(t,i){return['①','②','③'][i]+' '+ee(t)}).join(' ')+'</div>':'')+(dd.done?'<div style="font-size:12px;color:var(--tx2);line-height:1.5">'+ee(dd.done.slice(0,100))+'</div>':'')+(dd.q?'<div style="font-size:11px;color:var(--tx2);margin-top:4px;font-style:italic">「'+ee(dd.q)+'」</div>':'')+(dd.ai?'<div style="font-size:11px;color:var(--stx);margin-top:6px;padding:6px 9px;background:var(--sbg);border-radius:7px">'+ee(dd.ai.slice(0,100))+'</div>':'')+'</div></div>'});}
+  $('ct').innerHTML=h;
+}
+
+var iT='sp',tO=null,aT=false,mB=false,pB=false;
+var FW=[{id:'grow',n:'GROW'},{id:'circle',n:'控制圈'},{id:'5why',n:'5个为什么'},{id:'swot',n:'SWOT'},{id:'univ',n:'万能迷茫'}];
+var fp={};
+window.iSw=function(t){iT=t;tO=null;aT=false;pIdeas()};
+window.addSp=function(){var inp=$('spi');var c=inp&&inp.value.trim();if(!c)return;var s=ld('os_sp',[]);s.unshift({c:c,d:td()});sv('os_sp',s);inp.value='';pIdeas()};
+window.dSp=function(i){var s=ld('os_sp',[]);s.splice(i,1);sv('os_sp',s);pIdeas()};
+window.tFp=function(id,btn){if(fp[id]){delete fp[id];btn.style.background='none';btn.style.color='var(--tx2)'}else{fp[id]=true;btn.style.background='var(--ibg)';btn.style.color='var(--bl)'}};
+window.saveTp=function(){var tt=$('tptt');var tc=$('tptc');if(!tt||!tt.value.trim())return;var fws=FW.filter(function(f){return fp[f.id]}).map(function(f){return f.n});var t=ld('os_tp',[]);t.unshift({id:Date.now(),title:tt.value.trim(),ctx:(tc&&tc.value)||'',micro:'',macro:'',road:'',fws:fws,mm:null,date:td()});sv('os_tp',t);aT=false;fp={};tO=0;pIdeas()};
+window.dTp=function(i){var t=ld('os_tp',[]);t.splice(i,1);sv('os_tp',t);tO=null;pIdeas()};
+window.uTp=function(i,f,v){var t=ld('os_tp',[]);if(t[i])t[i][f]=v;sv('os_tp',t)};
+window.tpCk=function(i){tO=tO===i?null:i;aT=false;pIdeas()};
+window.doPDCA=function(){
+  var sp=ld('os_sp',[]);
+  if(!sp.length)return;
+  pB=true;pIdeas();
+  var items=sp.slice(0,12).map(function(s,i){return(i+1)+'. '+s.c}).join('\n');
+  var msg='碎片灵感：\n'+items+'\n\n用PDCA归类。格式：\nP(核心问题)：\nP(建议计划)：\nD(立即可做)：\nC(需验证假设)：\nA(长期行动)：\n简洁中文。';
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:msg}]})})
+  .then(function(r){return r.json()})
+  .then(function(data){sv('os_pdca',(data.content&&data.content[0]&&data.content[0].text)||'失败');pB=false;pIdeas()})
+  .catch(function(){sv('os_pdca','连接失败');pB=false;pIdeas()});
+};
+window.doMM=function(i){
+  var topics=ld('os_tp',[]);var t=topics[i];if(!t)return;
+  mB=true;pIdeas();
+  var msg='生成思维导图JSON。话题:'+t.title+' 背景:'+(t.ctx||'无')+' 微观:'+(t.micro||'无')+' 宏观:'+(t.macro||'无')+'\n只输出JSON格式：{"center":"标题","branches":[{"label":"分支","nodes":["节点1","节点2"]}]}\n3-5分支，每分支2-4节点，中文简洁。';
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:msg}]})})
+  .then(function(r){return r.json()})
+  .then(function(data){
+    var raw=(data.content&&data.content[0]&&data.content[0].text)||'';
+    raw=raw.replace(/[`]{3}json|[`]{3}/g,'').trim();
+    try{topics[i].mm=JSON.parse(raw);sv('os_tp',topics);}catch(e){}
+    mB=false;pIdeas();
+  })
+  .catch(function(){mB=false;pIdeas()});
+};
+function rMM(t){
+  if(!t.mm)return'<p style="font-size:11px;color:var(--tx2);margin-bottom:7px">点「AI生成」提炼思维导图</p>';
+  var mm=t.mm;var h='<div style="background:var(--ibg);border-radius:8px;padding:8px 13px;text-align:center;font-size:13px;font-weight:500;color:var(--bl);margin-bottom:10px">'+ee(mm.center)+'</div>';
+  (mm.branches||[]).forEach(function(b){h+='<div style="border-left:2px solid var(--ibd);padding-left:11px;margin-bottom:9px"><div style="font-size:10px;font-weight:500;color:var(--bl);margin-bottom:4px;text-transform:uppercase">'+ee(b.label)+'</div>';(b.nodes||[]).forEach(function(n){h+='<div style="font-size:12px;padding:5px 9px;background:var(--sf);border:.5px solid var(--bd);border-radius:6px;margin-bottom:4px">• '+ee(n)+'</div>'});h+='</div>'});
+  return h;
+}
+function pIdeas(){
+  var sp=ld('os_sp',[]);var topics=ld('os_tp',[]);
+  var h='<div class="tabs"><button class="tab '+(iT==='sp'?'on':'')+'" onclick="iSw(\'sp\')">✦ 灵感</button><button class="tab '+(iT==='tp'?'on':'')+'" onclick="iSw(\'tp\')">◈ 成型想法</button></div>';
+  if(iT==='sp'){h+='<span class="hint">随手记，杂乱没关系，攒够几条让 AI 归类。</span><div class="card"><div style="display:flex;gap:7px"><textarea rows="2" id="spi" placeholder="一闪而过的想法……" style="flex:1"></textarea><button class="btn" onclick="addSp()" style="align-self:flex-end">+</button></div></div>';if(sp.length){h+='<div class="sg2">'+sp.slice(0,18).map(function(s,i){return'<div class="sp"><button style="position:absolute;top:4px;right:6px;background:none;border:none;cursor:pointer;color:var(--tx2);font-size:10px" onclick="dSp('+i+')">✕</button><div style="font-size:12px;line-height:1.5">'+ee(s.c)+'</div><div style="font-size:9px;color:var(--tx2);margin-top:5px">'+s.d+'</div></div>'}).join('')+'</div><button class="btn w '+(pB?'g':'')+'" onclick="doPDCA()" '+(pB?'disabled':'')+'>'+( pB?'分析中…':'✦ AI 归类 (PDCA)')+'</button>';}else h+='<p style="text-align:center;color:var(--tx2);padding:28px 0;font-size:12px">还没有灵感</p>';var pdca=ld('os_pdca','');if(pdca)h+='<div style="background:var(--sbg);border:.5px solid var(--sbd);border-radius:9px;padding:11px 13px;margin-top:9px"><span class="lbl" style="color:var(--stx)">PDCA 结果</span><pre style="font-size:12px;line-height:1.7;color:var(--stx);white-space:pre-wrap;font-family:inherit">'+ee(pdca)+'</pre></div>';}
+  if(iT==='tp'){if(!aT)h+='<button onclick="aT=true;pIdeas()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border-radius:9px;border:1.5px dashed var(--bd);background:none;cursor:pointer;font-size:12px;color:var(--bl);margin-bottom:9px">+ 新建话题</button>';if(aT)h+='<div class="card" style="border-color:var(--bl)"><span class="lbl">新话题</span><input type="text" id="tptt" placeholder="话题名称" style="margin-bottom:7px"><span class="lbl">背景/Context</span><textarea rows="3" id="tptc" placeholder="来龙去脉……" style="margin-bottom:10px"></textarea><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">'+FW.map(function(f){return'<button id="fp'+f.id+'" onclick="tFp(\''+f.id+'\',this)" style="padding:5px 10px;border-radius:20px;border:.5px solid var(--bd);background:none;font-size:11px;cursor:pointer;color:var(--tx2)">'+f.n+'</button>'}).join('')+'</div><div style="display:flex;gap:7px"><button class="btn" onclick="saveTp()">保存</button><button class="btn g" onclick="aT=false;pIdeas()">取消</button></div></div>';if(!topics.length&&!aT)h+='<p style="text-align:center;color:var(--tx2);padding:28px 0;font-size:12px">还没有成型想法</p>';topics.forEach(function(t,i){var open=tO===i;h+='<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="tpCk('+i+')"><div><div style="font-size:14px;font-weight:500">'+ee(t.title)+'</div><div style="font-size:10px;color:var(--tx2)">'+t.date+'</div></div><div style="display:flex;align-items:center;gap:7px"><span style="font-size:10px;color:var(--tx2)">'+(open?'▲':'▼')+'</span><button onclick="event.stopPropagation();dTp('+i+')" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px">✕</button></div></div>';if(open){h+='<div style="margin-top:10px">';if(t.fws&&t.fws.length)h+='<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px">'+t.fws.map(function(f){return'<span class="chip">'+ee(f)+'</span>'}).join('')+'</div>';h+='<div class="fb"><span class="lbl">背景/Context</span><textarea rows="3" oninput="uTp('+i+',\'ctx\',this.value)" style="margin-top:5px">'+ee(t.ctx||'')+'</textarea></div><div class="fb"><span class="lbl" style="color:var(--bl)">🔬 微观</span><textarea rows="3" placeholder="从我自己的角度看……" oninput="uTp('+i+',\'micro\',this.value)" style="margin-top:5px">'+ee(t.micro||'')+'</textarea></div><div class="fb"><span class="lbl" style="color:var(--bl)">🌐 宏观</span><textarea rows="3" placeholder="从更大视角看……" oninput="uTp('+i+',\'macro\',this.value)" style="margin-top:5px">'+ee(t.macro||'')+'</textarea></div><div class="fb"><span class="lbl" style="color:var(--stx)">🗺 Roadmap</span><textarea rows="3" placeholder="行动路径……" oninput="uTp('+i+',\'road\',this.value)" style="margin-top:5px">'+ee(t.road||'')+'</textarea></div><div class="fb"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span class="lbl" style="margin:0;color:var(--wtx)">🧠 Mind Map</span><button class="btn s '+(mB?'g':'')+'" onclick="doMM('+i+')" '+(mB?'disabled':'')+'>'+( mB?'生成中…':'✦ AI生成')+'</button></div>'+rMM(t)+'</div></div>';}h+='</div>'});} 
+  $('ct').innerHTML=h;
+}
+
+var QS=[['q1','🌍 世界观','你认为人性本质上是善还是恶？'],['q2','🌍 世界观','这个社会对普通人公平吗？'],['q3','🌍 世界观','你相信努力一定有回报吗？'],['q4','⭐ 价值观','你最不能妥协的一件事？'],['q5','⭐ 价值观','你愿意为了成功付出多大代价？'],['q6','⭐ 价值观','你觉得人最终活给谁看？'],['q7','💰 金钱观','钱对你是目的还是工具？'],['q8','💰 金钱观','你能接受的最差财务状态？'],['q9','💰 金钱观','如果突然有100万，第一件事？']];
+var vT='bel',vA=null,vSA=false;
+window.vSw=function(t){vT=t;vA=null;vSA=false;pViews()};
+window.vCk=function(id){vA=vA===id?null:id;pViews()};
+window.sBl=function(id,v){var a=ld('os_bel',{});a[id]=v;sv('os_bel',a)};
+window.sSta=function(){
+  var t=$('st0');if(!t||!t.value.trim())return;
+  var m=($('st1')&&$('st1').value)||'';
+  var mine=($('st2')&&$('st2').value)||'';
+  var c=+(($('stcr')&&$('stcr').value)||70);
+  var l=ld('os_st',[]);l.unshift({topic:t.value.trim(),m:m,mine:mine,c:c});
+  sv('os_st',l);vSA=false;pViews();
+};
+window.dSta=function(i){var l=ld('os_st',[]);l.splice(i,1);sv('os_st',l);pViews()};
+function pViews(){
+  var ans=ld('os_bel',{});var sl=ld('os_st',[]);
+  var h='<div class="tabs"><button class="tab '+(vT==='bel'?'on':'')+'" onclick="vSw(\'bel\')">◈ 三观底层</button><button class="tab '+(vT==='sta'?'on':'')+'" onclick="vSw(\'sta\')">◉ 立场地图</button></div>';
+  var filled=QS.filter(function(q){return ans[q[0]]&&ans[q[0]].trim()}).length;
+  if(vT==='bel'){h+='<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="lbl" style="margin:0">完善度</span><span style="font-size:11px;color:var(--bl);font-weight:500">'+filled+'/9</span></div><div class="pb"><div class="pf" style="width:'+Math.round(filled/9*100)+'%"></div></div></div>';var cats=[];QS.forEach(function(q){if(cats.indexOf(q[1])<0)cats.push(q[1])});cats.forEach(function(cat){h+='<div style="font-size:12px;font-weight:500;margin:13px 0 7px 2px">'+cat+'</div>';QS.filter(function(q){return q[1]===cat}).forEach(function(q){var id=q[0];var f=ans[id]&&ans[id].trim();var open=vA===id;h+='<div class="card" style="margin-bottom:7px;cursor:pointer" onclick="vCk(\''+id+'\')" ><div style="display:flex;justify-content:space-between;align-items:flex-start"><p style="margin:0;font-size:13px;line-height:1.5;flex:1;padding-right:8px;color:'+(f?'var(--tx)':'var(--tx2)')+'">'+q[2]+'</p><span style="font-size:11px;color:'+(f?'var(--stx)':'var(--tx2)')+'">'+( f?'✓':'+')+'</span></div>'+(f&&!open?'<p style="margin:6px 0 0;font-size:11px;color:var(--tx2);font-style:italic">「'+ee(ans[id])+'」</p>':'')+(open?'<textarea rows="3" placeholder="写下你的想法……" oninput="sBl(\''+id+'\',this.value)" onclick="event.stopPropagation()" style="margin-top:9px;width:100%;background:var(--sec);border:.5px solid var(--bd);border-radius:7px;padding:8px 10px;color:var(--tx);font-family:inherit;font-size:13px;resize:vertical;outline:none">'+ee(ans[id]||'')+'</textarea>':'')+'</div>'});});}
+  else{h+='<span class="hint">立场是三观在具体话题上的应用。</span>';if(!vSA)h+='<button onclick="vSA=true;pViews()" style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:9px;border-radius:9px;border:1.5px dashed var(--bd);background:none;cursor:pointer;font-size:12px;color:var(--bl);margin-bottom:9px">+ 添加新立场</button>';if(vSA)h+='<div class="card" style="border-color:var(--bl)"><span class="lbl">新立场</span><input type="text" id="st0" placeholder="话题 *" style="margin-bottom:7px"><textarea rows="2" id="st1" placeholder="主流观点……" style="margin-bottom:7px"></textarea><textarea rows="3" id="st2" placeholder="我的立场+理由……" style="margin-bottom:9px"></textarea><span class="lbl" style="margin-bottom:4px">置信度：<span id="stcv">70</span>%</span><input type="range" min="10" max="100" value="70" id="stcr" oninput="document.getElementById(\'stcv\').textContent=this.value" style="margin:5px 0 10px"><div style="display:flex;gap:7px"><button class="btn" onclick="sSta()">保存</button><button class="btn g" onclick="vSA=false;pViews()">取消</button></div></div>';if(!sl.length&&!vSA)h+='<p style="text-align:center;color:var(--tx2);padding:20px 0;font-size:12px">还没有立场</p>';sl.forEach(function(s,i){var cc=s.c>=75?'g':s.c>=50?'':'n';h+='<div class="card" style="margin-bottom:7px"><div style="display:flex;justify-content:space-between"><div style="font-size:13px;font-weight:500;flex:1">'+ee(s.topic)+'</div><div style="display:flex;gap:6px;flex-shrink:0"><span class="chip '+cc+'">'+s.c+'%</span><button onclick="dSta('+i+')" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px">✕</button></div></div>'+(s.m?'<div style="font-size:11px;color:var(--tx2);margin-top:6px;background:var(--sec);padding:5px 9px;border-radius:6px">主流：'+ee(s.m)+'</div>':'')+(s.mine?'<div style="font-size:12px;margin-top:6px;line-height:1.6">我：'+ee(s.mine)+'</div>':'')+'</div>'});}
+  $('ct').innerHTML=h;
+}
+
+var FWKS=[{id:'grow',e:'🧭',n:'GROW',d:'目标→现状→方案→行动',f:[{k:'g',l:'Goal'},{k:'r',l:'Reality'},{k:'o',l:'Options'},{k:'w',l:'Will'}]},{id:'circle',e:'🎯',n:'控制圈',d:'专治焦虑内耗',f:[{k:'w',l:'焦虑的事'},{k:'cant',l:'关心圈'},{k:'can',l:'影响圈'},{k:'nx',l:'第一件事'}]},{id:'univ',e:'🧩',n:'万能迷茫',d:'6个问题清脑子',f:[{k:'p',l:'核心矛盾'},{k:'f',l:'害怕什么'},{k:'w2',l:'最坏结果'},{k:'c',l:'能控制的'},{k:'s1',l:'最小一步'},{k:'s2',l:'下一步'}]},{id:'5why',e:'🔍',n:'5个为什么',d:'找根因',f:[{k:'p',l:'表面问题'},{k:'w1',l:'为什么1'},{k:'w2b',l:'为什么2'},{k:'w3',l:'为什么3'},{k:'w4',l:'为什么4'},{k:'w5',l:'根因'},{k:'a',l:'行动'}]},{id:'emotion',e:'💭',n:'情绪解构',d:'心情差时用',f:[{k:'e2',l:'发生了什么'},{k:'i',l:'怎么解读'},{k:'f2',l:'我感到'},{k:'n',l:'真正需要什么'},{k:'a',l:'能做的一件事'}]},{id:'swot',e:'📊',n:'SWOT',d:'评估机会',f:[{k:'t',l:'对象'},{k:'s',l:'优势'},{k:'w',l:'劣势'},{k:'o',l:'机会'},{k:'th',l:'威胁'},{k:'c',l:'结论'}]},{id:'y5',e:'📅',n:'五年倒推',d:'从未来倒推到今天',f:[{k:'y5',l:'5年后'},{k:'y3',l:'3年'},{k:'y1',l:'1年'},{k:'now',l:'今年暑假'},{k:'t2',l:'今天'}]}];
+var PMPTS=[{id:'p1',e:'⚙',n:'拆解任何问题',d:'通用拆解',txt:'请帮我拆解这个问题：\n1. 核心矛盾\n2. 背后根因\n3. 三个解决路径\n4. 推荐第一步\n\n问题：[填入]'},{id:'p2',e:'💼',n:'职业决策',d:'评估机会',txt:'分析这个选择：\n背景：[情况]\n选项：[机会]\n分析：简历价值/能学到什么/机会成本/综合建议'},{id:'p3',e:'🔄',n:'复盘一件事',d:'深度复盘',txt:'复盘：[事件]\n1.做对了什么 2.可以更好的 3.学到什么 4.下次怎么做'},{id:'p4',e:'⚡',n:'克服拖延',d:'拆成能启动的步骤',txt:'我在拖延：[任务]\n原因：[猜测]\n请拆成5个最小步骤，给出15分钟内能开始的第一步。'}];
+var cT='fw',fwSel=null,fwFm={},fwLT='fw';
+window.cSw=function(t){cT=t;fwSel=null;pCol()};
+window.cpP=function(id){
+  var p=PMPTS.filter(function(x){return x.id===id})[0];if(!p)return;
+  if(navigator.clipboard)navigator.clipboard.writeText(p.txt).then(function(){var b=$('cpb'+id);if(b){b.textContent='✓ 已复制';setTimeout(function(){b.textContent='复制 Prompt'},2000)}});
+};
+window.saveFw=function(){sv('os_fwe',[{id:Date.now(),fwkId:fwSel,date:td(),fields:Object.assign({},fwFm)}].concat(ld('os_fwe',[])));fwSel=null;fwFm={};fwLT='log';pCol()};
+window.dFw=function(id){sv('os_fwe',ld('os_fwe',[]).filter(function(x){return x.id!==id}));pCol()};
+window.addCol=function(type){
+  var t=$('cl0');if(!t||!t.value.trim())return;
+  var url=($('cl1')&&$('cl1').value)||'';
+  var content=($('cl2')&&$('cl2').value)||'';
+  sv('os_col',[{id:Date.now(),type:type,title:t.value.trim(),url:url,content:content,date:td()}].concat(ld('os_col',[])));
+  pCol();
+};
+window.dCol=function(i){var items=ld('os_col',[]);items.splice(i,1);sv('os_col',items);pCol()};
+function pCol(){
+  var items=ld('os_col',[]);var fwEn=ld('os_fwe',[]);
+  var h='<div class="tabs"><button class="tab '+(cT==='fw'?'on':'')+'" onclick="cSw(\'fw\')">⬡ 框架</button><button class="tab '+(cT==='ai'?'on':'')+'" onclick="cSw(\'ai\')">◎ AI对话</button><button class="tab '+(cT==='ot'?'on':'')+'" onclick="cSw(\'ot\')">👥 他人观点</button><button class="tab '+(cT==='lk'?'on':'')+'" onclick="cSw(\'lk\')">🔗 链接</button></div>';
+  if(cT==='fw'){
+    if(fwSel){
+      var fw=FWKS.filter(function(x){return x.id===fwSel})[0]||PMPTS.filter(function(x){return x.id===fwSel})[0];
+      if(!fw){fwSel=null;pCol();return;}
+      var isP=!!PMPTS.filter(function(x){return x.id===fwSel})[0];
+      h+='<div class="card" style="background:var(--ibg);border-color:var(--ibd);margin-bottom:11px"><div style="display:flex;align-items:center;gap:9px"><span style="font-size:18px">'+fw.e+'</span><div><div style="font-size:14px;font-weight:500">'+fw.n+'</div><div style="font-size:11px;color:var(--tx2);margin-top:1px">'+fw.d+'</div></div></div></div>';
+      if(isP){h+='<div class="card"><span class="lbl">Prompt</span><pre style="font-size:12px;line-height:1.7;white-space:pre-wrap;font-family:inherit;margin-top:7px;background:var(--sec);padding:9px;border-radius:7px">'+ee(fw.txt)+'</pre><button class="btn w" id="cpb'+fw.id+'" onclick="cpP(\''+fw.id+'\')" style="margin-top:9px">复制 Prompt</button></div>';}
+      else{fw.f.forEach(function(fi){h+='<div class="card" style="margin-bottom:7px"><span class="lbl" style="color:var(--bl)">'+fi.l+'</span><textarea rows="3" placeholder="写下想法……" oninput="fwFm[\''+fi.k+'\']=this.value" style="margin-top:5px">'+ee(fwFm[fi.k]||'')+'</textarea></div>'});h+='<div style="display:flex;gap:7px"><button class="btn" style="flex:2" onclick="saveFw()">💾 保存</button><button class="btn g" style="flex:1" onclick="fwSel=null;pCol()">取消</button></div>';}
+      $('ct').innerHTML=h;return;
+    }
+    h+='<div style="display:flex;border-bottom:.5px solid var(--bd);margin-bottom:12px">'+['fw','prompt','log'].map(function(t){return'<button style="flex:1;padding:7px 0;border:none;background:none;cursor:pointer;font-size:11px;font-family:inherit;color:'+(fwLT===t?'var(--bl)':'var(--tx2)')+';border-bottom:2px solid '+(fwLT===t?'var(--bl)':'transparent')+';margin-bottom:-1px" onclick="fwLT=\''+t+'\';pCol()">'+(t==='fw'?'框架模板':t==='prompt'?'Prompt':'记录')+'</button>'}).join('')+'</div>';
+    if(fwLT==='fw'){FWKS.forEach(function(f){h+='<button onclick="fwSel=\''+f.id+'\';fwFm={};pCol()" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;background:var(--sf);border:.5px solid var(--bd);border-radius:9px;margin-bottom:7px;cursor:pointer;text-align:left"><div style="width:30px;height:30px;border-radius:7px;background:var(--ibg);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">'+f.e+'</div><div><div style="font-size:13px;font-weight:500">'+f.n+'</div><div style="font-size:11px;color:var(--tx2);margin-top:1px">'+f.d+'</div></div><span style="color:var(--tx2);margin-left:auto">›</span></button>'});}
+    else if(fwLT==='prompt'){PMPTS.forEach(function(p){h+='<button onclick="fwSel=\''+p.id+'\';fwFm={};pCol()" style="display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;background:var(--sf);border:.5px solid var(--bd);border-radius:9px;margin-bottom:7px;cursor:pointer;text-align:left"><div style="width:30px;height:30px;border-radius:7px;background:var(--sbg);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">'+p.e+'</div><div><div style="font-size:13px;font-weight:500">'+p.n+'</div><div style="font-size:11px;color:var(--tx2);margin-top:1px">'+p.d+'</div></div><span style="color:var(--tx2);margin-left:auto">›</span></button>'});}
+    else{
+      if(!fwEn.length)h+='<p style="text-align:center;color:var(--tx2);padding:28px 0;font-size:12px">还没有使用记录</p>';
+      fwEn.forEach(function(en,i){
+        var f=FWKS.filter(function(x){return x.id===en.fwkId})[0]||PMPTS.filter(function(x){return x.id===en.fwkId})[0];
+        if(!f)return;
+        var tit=en.fields&&Object.values(en.fields)[0]||f.n;
+        h+='<div class="card" style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="xp(\'fh'+i+'\',this,\'▼\',\'▲\')"><div style="display:flex;align-items:center;gap:8px"><span>'+f.e+'</span><div><div style="font-size:12px;font-weight:500">'+ee(String(tit||f.n).slice(0,26))+'</div><div style="font-size:10px;color:var(--tx2)">'+f.n+' · '+en.date+'</div></div></div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:10px;color:var(--tx2)">▼</span><button onclick="event.stopPropagation();dFw('+en.id+')" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px">✕</button></div></div><div id="fh'+i+'" style="display:none;margin-top:8px">'+(f.f||[]).filter(function(fi){return en.fields&&en.fields[fi.k]&&en.fields[fi.k].trim()}).map(function(fi){return'<div class="fb"><span class="lbl" style="color:var(--bl)">'+fi.l+'</span><div style="font-size:12px;line-height:1.6;margin-top:3px;white-space:pre-wrap">'+ee(en.fields[fi.k])+'</div></div>'}).join('')+'</div></div>';
+      });
+    }
+  } else {
+    var tmap={ai:'AI 对话',ot:'他人观点',lk:'链接'};
+    var ct={ai:'ai',ot:'others',lk:'link'}[cT];
+    var fil=items.filter(function(x){return x.type===ct});
+    h+='<div class="card"><span class="lbl">新增'+tmap[cT]+'</span><input type="text" id="cl0" placeholder="标题" style="margin-bottom:7px">'+(cT==='lk'?'<input type="text" id="cl1" placeholder="URL（可选）" style="margin-bottom:7px">':'<span id="cl1" style="display:none"></span>')+'<textarea rows="4" id="cl2" placeholder="'+(cT==='ai'?'AI 内容…':cT==='ot'?'观点内容…':'备注…')+'"></textarea><button class="btn w" onclick="addCol(\''+ct+'\')" style="margin-top:8px">+ 保存</button></div>';
+    if(!fil.length)h+='<p style="text-align:center;color:var(--tx2);padding:24px 0;font-size:12px">暂无记录</p>';
+    fil.forEach(function(item){
+      var i=items.indexOf(item);
+      h+='<div class="card" style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:13px;font-weight:500">'+ee(item.title||'')+'</div><div style="font-size:10px;color:var(--tx2);margin-top:2px">'+item.date+'</div></div><button onclick="dCol('+i+')" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px">✕</button></div>'+(item.url?'<a href="'+ee(item.url)+'" style="font-size:11px;color:var(--bl);display:block;margin-top:5px;word-break:break-all">'+ee(item.url)+'</a>':'')+(item.content?'<div style="font-size:12px;margin-top:7px;line-height:1.6">'+ee(item.content.slice(0,200))+(item.content.length>200?'…':'')+'</div>':'')+'</div>';
+    });
+  }
+  $('ct').innerHTML=h;
+}
+
+
+// ── 数据导出/导入 ──────────────────────────────────────────────────────────
+window.exportData = function(){
+  var keys=['os_p','os_sk','os_skn','os_wld','os_files','os_rec','os_sp','os_pdca','os_tp','os_bel','os_st','os_col','os_fwe'];
+  var data={};
+  keys.forEach(function(k){var v=localStorage.getItem(k);if(v)data[k]=JSON.parse(v)});
+  data._exported=new Date().toISOString();
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='人生OS数据备份_'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();
+};
+window.importData = function(inp){
+  var file=inp.files[0];if(!file)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      var keys=['os_p','os_sk','os_skn','os_wld','os_files','os_rec','os_sp','os_pdca','os_tp','os_bel','os_st','os_col','os_fwe'];
+      var count=0;
+      keys.forEach(function(k){if(data[k]!==undefined){localStorage.setItem(k,JSON.stringify(data[k]));count++;}});
+      alert('导入成功！恢复了 '+count+' 项数据，刷新页面生效。');
+    }catch(ex){alert('文件格式错误，请使用从本 app 导出的 JSON 文件。');}
+  };
+  r.readAsText(file,'UTF-8');
+};
+
+go(0);
+
+</script>
+</body>
+</html>
