@@ -79,7 +79,7 @@ var $=function(id){return document.getElementById(id)};
 var ld=function(k,f){try{var v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}};
 var sv=function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 var ee=function(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
-var td=function(){return new Date().toISOString().split('T')[0]};
+var td=function(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 $('D').textContent=new Date().toLocaleDateString('zh-CN',{month:'long',day:'numeric',weekday:'short'});
 var PAGES=['个人总览','记录','想法','三观','收集'];
 function go(i){
