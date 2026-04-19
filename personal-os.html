@@ -139,8 +139,8 @@ function pMe(){
 
 var rT='am';
 window.rSw=function(t){rT=t;pRec()};
-window.sR=function(f,v){var tk=td();var all=ld('os_rec',{});if(!all[tk])all[tk]={};all[tk][f]=v;sv('os_rec',all)};
-window.sSc=function(f,v){var tk=td();var all=ld('os_rec',{});if(!all[tk])all[tk]={};all[tk][f]=+v;sv('os_rec',all);var el=$('sc'+f);if(el)el.textContent=v};
+window.sR=function(f,v){var tk=td();var draft=ld('os_draft',{});if(!draft[tk])draft[tk]={};draft[tk][f]=v;sv('os_draft',draft)};
+window.sSc=function(f,v){var tk=td();var draft=ld('os_draft',{});if(!draft[tk])draft[tk]={};draft[tk][f]=+v;sv('os_draft',draft);var el=$('sc'+f);if(el)el.textContent=v};
 var rAI=false;
 window.doAI=function(){
   var tk=td();var d=ld('os_rec',{})[tk]||{};
@@ -155,8 +155,7 @@ window.doAI=function(){
 
 function pRec(){
   var tk=td();
-  var all=ld('os_rec',{});
-  var d=all[tk]||{};  // always today's data - naturally empty on new day
+  var d=ld('os_draft',{})[tk]||{};  // today's draft - always fresh after submit
 
   var h='<div class="tabs">'
     +'<button class="tab '+(rT==='am'?'on':'')+'" onclick="rSw(\'am\')">☀ 早间</button>'
@@ -214,11 +213,7 @@ function pRec(){
           +'<input type="range" min="1" max="10" value="'+(d[s[0]]||5)+'" oninput="sSc(\''+s[0]+'\',this.value)" style="margin-top:4px"></div>';
       }).join('')+'</div></div>';
     // submit button - always show if not submitted today
-    if(!d.submitted){
-      h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
-    } else {
-      h+='<div style="text-align:center;padding:10px;font-size:12px;color:var(--stx)">✓ 已提交 · '+( d.submittedAt||'')+' · 可在历史查看</div>';
-    }
+    h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
   }
 
   // ── 极简版 ─────────────────────────────────────────────────
@@ -227,87 +222,80 @@ function pRec(){
     [['kw','今日关键词','一两个词'],['high','高光时刻','今天最好的那一刻'],['low','踩坑时刻','今天最糟糕的那一刻'],['fix','明日改进','明天只改一件事'],['q','一句话总结','用一句话概括今天']].forEach(function(f){
       h+='<div class="card"><span class="lbl">'+f[1]+'</span><input type="text" value="'+ee(d[f[0]]||'')+'" placeholder="'+f[2]+'……" oninput="sR(\''+f[0]+'\',this.value)" style="margin-top:5px"></div>';
     });
-    if(!d.submitted){
-      h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
-    }
+    h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
   }
 
   // ── 历史（按月分组，完整表单）─────────────────────────────
   if(rT==='h'){
-    var en=Object.entries(all).sort(function(a,b){return b[0].localeCompare(a[0])});
-    if(!en.length){
+    var recs=ld('os_recs',[]);
+    // also migrate legacy os_rec data if exists
+    var legacy=ld('os_rec',{});
+    Object.keys(legacy).forEach(function(date){
+      var dd=legacy[date];
+      if(dd&&(dd.done||dd.t1)&&!recs.find(function(r){return r.id&&r.date===date&&r._legacy})){
+        recs.push(Object.assign({},dd,{id:dd.id||parseInt(date.replace(/-/g,'')+'000'),date:date,_legacy:true}));
+      }
+    });
+    if(!recs.length){
       h+='<p style="text-align:center;color:var(--tx2);padding:40px 0;font-size:12px">还没有历史记录</p>';
     } else {
+      // group by month
       var months={};
-      en.forEach(function(entry){
-        var ym=entry[0].slice(0,7);
+      recs.forEach(function(r){
+        var ym=r.date.slice(0,7);
         if(!months[ym])months[ym]=[];
-        months[ym].push(entry);
+        months[ym].push(r);
       });
       Object.keys(months).sort(function(a,b){return b.localeCompare(a)}).forEach(function(ym){
         var parts=ym.split('-');
         var label=parts[0]+'年'+parseInt(parts[1])+'月';
         var mid='m'+ym.replace('-','');
         h+='<div style="margin-bottom:8px">'
-          +'<button onclick="var el=document.getElementById(\''+mid+'\');if(el){var s=el.style.display===\'none\';el.style.display=s?\'block\':\'none\';this.textContent=(s?\'▼ \':\'▲ \')+\''+label+'\'}" style="width:100%;text-align:left;padding:8px 12px;background:var(--nv);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit">▼ '+label+'</button>'
+          +'<button data-mid="'+mid+'" data-lbl="'+label+'" onclick="toggleMonth(this)" style="width:100%;text-align:left;padding:8px 12px;background:var(--nv);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit">▼ '+label+'</button>'
           +'<div id="'+mid+'" style="padding-top:6px">';
 
-        months[ym].forEach(function(entry){
-          var date=entry[0];var dd=entry[1];var isToday=date===tk;
+        months[ym].sort(function(a,b){return(b.id||0)-(a.id||0)}).forEach(function(r){
+          var rid='r'+r.id;var isToday=r.date===tk;
           h+='<div class="card" style="margin-bottom:7px'+(isToday?';border-color:var(--bl)':'')+'">'
-            +'<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" onclick="var el=document.getElementById(\'rh'+date+'\');if(el){var s=el.style.display===\'none\';el.style.display=s?\'block\':\'none\';this.querySelector(\'.arr\').textContent=s?\'▲\':\'▼\'}">'
+            +'<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer" data-rid="'+rid+'" onclick="toggleRec(this)">'
             +'<div style="display:flex;align-items:center;gap:6px">'
-            +'<span style="font-size:13px;font-weight:500">'+date+'</span>'
+            +'<span style="font-size:13px;font-weight:500">'+r.date+'</span>'
+            +(r.submittedAt?'<span style="font-size:9px;color:var(--tx2)">'+r.submittedAt+'</span>':'')
             +(isToday?'<span style="font-size:9px;background:var(--ibg);color:var(--bl);padding:1px 6px;border-radius:10px">今天</span>':'')
-            +(dd.submitted?'<span style="font-size:9px;background:var(--sbg);color:var(--stx);padding:1px 6px;border-radius:10px">已提交</span>':'')
             +'</div>'
             +'<div style="display:flex;align-items:center;gap:7px">'
-            +(dd.st?'<span class="chip '+(dd.st>=7?'g':dd.st>=4?'':'n')+'">'+dd.st+'/10</span>':'')
+            +(r.st?'<span class="chip '+(r.st>=7?'g':r.st>=4?'':'n')+'">'+r.st+'/10</span>':'')
             +'<span class="arr" style="font-size:10px;color:var(--tx2)">▼</span>'
-            +'<button onclick="event.stopPropagation();deleteRec(this.dataset.d)" data-d="'+date+'" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px;padding:2px 4px" title="删除">🗑</button>'
+            +'<button onclick="event.stopPropagation();deleteRec(this.dataset.id)" data-id="'+r.id+'" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px;padding:2px 4px" title="删除">🗑</button>'
             +'</div></div>'
-            // Full record - expanded
-            +'<div id="rh'+date+'" style="display:none;margin-top:10px">';
+            +'<div id="'+rid+'" style="display:none;margin-top:10px">';
 
-          // Morning tasks (read-only)
-          if(dd.t1||dd.t2||dd.t3){
+          if(r.t1||r.t2||r.t3){
             h+='<div class="fb"><span class="lbl">☀ 早间目标</span>'
-              +[dd.t1,dd.t2,dd.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:4px 0;border-bottom:.5px solid var(--bd)">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
+              +[r.t1,r.t2,r.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:4px 0;border-bottom:.5px solid var(--bd)">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
               +'</div>';
           }
-          if(dd.avoid)h+='<div class="fb"><span class="lbl">避坑提醒</span><div style="font-size:12px;color:var(--tx2);margin-top:3px">'+ee(dd.avoid)+'</div></div>';
+          if(r.avoid)h+='<div class="fb"><span class="lbl">避坑提醒</span><div style="font-size:12px;color:var(--tx2);margin-top:3px">'+ee(r.avoid)+'</div></div>';
 
-          // Evening fields - all editable
-          var evFields=[
-            ['done','完成情况',3],['bonus','额外收获',2],
-            ['bad','问题不足',2],['delay','浪费时间',2],['moodN','情绪状态',2],
-            ['learn','今日反思',2],['dec','关键决定',2],['redo','如果重来',2]
-          ];
+          var evFields=[['done','完成情况',3],['bonus','额外收获',2],['bad','问题不足',2],['delay','浪费时间',2],['moodN','情绪状态',2],['learn','今日反思',2],['dec','关键决定',2],['redo','如果重来',2]];
           evFields.forEach(function(f){
-            if(dd[f[0]]){
+            if(r[f[0]]){
               h+='<div class="fb"><span class="lbl">'+f[1]+'</span>'
-                +'<textarea rows="'+f[2]+'" style="margin-top:5px" oninput="var a=ld(\'os_rec\',{});if(!a[\''+date+'\'])a[\''+date+'\']={}; a[\''+date+'\'].'+f[0]+'=this.value;sv(\'os_rec\',a)">'+ee(dd[f[0]])+'</textarea>'
+                +'<textarea rows="'+f[2]+'" style="margin-top:5px" data-id="'+r.id+'" data-field="'+f[0]+'" oninput="updateRec(this.dataset.id,this.dataset.field,this.value)">'+ee(r[f[0]])+'</textarea>'
                 +'</div>';
             }
           });
 
-          // Tomorrow plan
-          if(dd.m1||dd.m2||dd.m3){
+          if(r.m1||r.m2||r.m3){
             h+='<div class="fb"><span class="lbl">明日计划</span>'
-              +[dd.m1,dd.m2,dd.m3].filter(Boolean).map(function(t,i){return'<div style="font-size:12px;padding:3px 0">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
+              +[r.m1,r.m2,r.m3].filter(Boolean).map(function(t,i){return'<div style="font-size:12px;padding:3px 0">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
               +'</div>';
           }
-
-          // Scores
-          if(dd.st){
+          if(r.st){
             h+='<div style="display:flex;justify-content:space-around;text-align:center;padding:10px;background:var(--sec);border-radius:8px;margin-top:4px">'
-              +[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){
-                return'<div><div style="font-size:9px;color:var(--tx2)">'+s[1]+'</div><div style="font-size:16px;font-weight:500;color:var(--bl)">'+(dd[s[0]]||'-')+'</div></div>';
-              }).join('')+'</div>';
+              +[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){return'<div><div style="font-size:9px;color:var(--tx2)">'+s[1]+'</div><div style="font-size:16px;font-weight:500;color:var(--bl)">'+(r[s[0]]||'-')+'</div></div>'}).join('')+'</div>';
           }
-
-          // Quick version
-          if(dd.q)h+='<div style="font-size:11px;color:var(--tx2);margin-top:8px;font-style:italic;text-align:center">「'+ee(dd.q)+'」</div>';
+          if(r.q)h+='<div style="font-size:11px;color:var(--tx2);margin-top:8px;font-style:italic;text-align:center">「'+ee(r.q)+'」</div>';
 
           h+='</div></div>';
         });
@@ -315,7 +303,6 @@ function pRec(){
       });
     }
   }
-
   $('ct').innerHTML=h;
 }
 
@@ -452,21 +439,53 @@ function pCol(){
 
 // ── 数据导出/导入 ──────────────────────────────────────────────────────────
 
-window.deleteRec = function(date){
-  if(!confirm(date+' 的记录将被删除，确认吗？')){return;}
-  var all=ld('os_rec',{});
-  delete all[date];
-  sv('os_rec',all);
+window.updateRec = function(id, field, val){
+  var rs=ld('os_recs',[]);
+  for(var i=0;i<rs.length;i++){if(rs[i].id==id){rs[i][field]=val;break;}}
+  sv('os_recs',rs);
+};
+
+window.toggleRec = function(btn){
+  var el=document.getElementById(btn.dataset.rid);
+  if(!el)return;
+  var s=el.style.display==='none';
+  el.style.display=s?'block':'none';
+  btn.querySelector('.arr').textContent=s?'▲':'▼';
+};
+
+window.toggleMonth = function(btn){
+  var el=document.getElementById(btn.dataset.mid);
+  if(!el)return;
+  var s=el.style.display==='none';
+  el.style.display=s?'block':'none';
+  btn.textContent=(s?'▼ ':'▲ ')+btn.dataset.lbl;
+};
+
+window.deleteRec = function(id){
+  var recs=ld('os_recs',[]);
+  var rec=recs.filter(function(r){return r.id==id})[0];
+  if(!rec)return;
+  if(!confirm(rec.date+' '+rec.submittedAt+' 的记录将被删除，确认吗？')){return;}
+  sv('os_recs',recs.filter(function(r){return r.id!=id}));
   pRec();
 };
 
 window.submitRec = function(){
-  var tk=td();var all=ld('os_rec',{});
-  if(!all[tk])all[tk]={};
-  if(!all[tk].t1&&!all[tk].done){alert('请至少填写今日完成情况再提交。');return;}
-  all[tk].submitted=true;
-  all[tk].submittedAt=new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
-  sv('os_rec',all);
+  var tk=td();
+  var draft=ld('os_draft',{})[tk]||{};
+  if(!draft.t1&&!draft.done&&!draft.q){alert('请至少填一项再提交。');return;}
+  var recs=ld('os_recs',[]);
+  var record=Object.assign({},draft,{
+    id:Date.now(),
+    date:tk,
+    submittedAt:new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})
+  });
+  recs.push(record);
+  sv('os_recs',recs);
+  // clear today's draft
+  var allDraft=ld('os_draft',{});
+  delete allDraft[tk];
+  sv('os_draft',allDraft);
   pRec();
 };
 
