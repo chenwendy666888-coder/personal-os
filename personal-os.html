@@ -263,7 +263,9 @@ function pRec(){
             +'</div>'
             +'<div style="display:flex;align-items:center;gap:7px">'
             +(dd.st?'<span class="chip '+(dd.st>=7?'g':dd.st>=4?'':'n')+'">'+dd.st+'/10</span>':'')
-            +'<span class="arr" style="font-size:10px;color:var(--tx2)">▼</span></div></div>'
+            +'<span class="arr" style="font-size:10px;color:var(--tx2)">▼</span>'
+            +'<button onclick="event.stopPropagation();deleteRec(this.dataset.d)" data-d="'+date+'" style="background:none;border:none;cursor:pointer;color:var(--tx2);font-size:11px;padding:2px 4px" title="删除">🗑</button>'
+            +'</div></div>'
             // Full record - expanded
             +'<div id="rh'+date+'" style="display:none;margin-top:10px">';
 
@@ -449,6 +451,14 @@ function pCol(){
 
 
 // ── 数据导出/导入 ──────────────────────────────────────────────────────────
+
+window.deleteRec = function(date){
+  if(!confirm(date+' 的记录将被删除，确认吗？')){return;}
+  var all=ld('os_rec',{});
+  delete all[date];
+  sv('os_rec',all);
+  pRec();
+};
 
 window.submitRec = function(){
   var tk=td();var all=ld('os_rec',{});
