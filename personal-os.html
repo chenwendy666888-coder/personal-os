@@ -154,61 +154,104 @@ window.doAI=function(){
 };
 
 function pRec(){
-  var tk=td();var all=ld('os_rec',{});var d=all[tk]||{};
-  var h='<div class="tabs"><button class="tab '+(rT==='am'?'on':'')+'" onclick="rSw(\'am\')">☀ 早间</button><button class="tab '+(rT==='pm'?'on':'')+'" onclick="rSw(\'pm\')">🌙 晚间复盘</button><button class="tab '+(rT==='q'?'on':'')+'" onclick="rSw(\'q\')">⚡ 极简版</button><button class="tab '+(rT==='h'?'on':'')+'" onclick="rSw(\'h\')">▤ 历史</button></div>';
+  var tk=td();
+  var all=ld('os_rec',{});
+  var d=all[tk]||{};  // always today's data - naturally empty on new day
 
+  var h='<div class="tabs">'
+    +'<button class="tab '+(rT==='am'?'on':'')+'" onclick="rSw(\'am\')">☀ 早间</button>'
+    +'<button class="tab '+(rT==='pm'?'on':'')+'" onclick="rSw(\'pm\')">🌙 晚间复盘</button>'
+    +'<button class="tab '+(rT==='q'?'on':'')+'" onclick="rSw(\'q\')">⚡ 极简版</button>'
+    +'<button class="tab '+(rT==='h'?'on':'')+'" onclick="rSw(\'h\')">▤ 历史</button>'
+    +'</div>';
+
+  // ── 早间 ──────────────────────────────────────────────────
   if(rT==='am'){
-    if(d.submitted)h+='<div style="background:var(--sbg);border:.5px solid var(--sbd);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--stx)">✓ 今日已归档，可在「历史」查看。表单仍可补充。</div>';
     h+='<div class="card"><span class="lbl">📋 今日最重要的3件事</span>'
       +'<input type="text" value="'+ee(d.t1||'')+'" placeholder="① 最重要的一件事" oninput="sR(\'t1\',this.value)" style="margin-top:6px;margin-bottom:6px">'
       +'<input type="text" value="'+ee(d.t2||'')+'" placeholder="② 第二件事" oninput="sR(\'t2\',this.value)" style="margin-bottom:6px">'
       +'<input type="text" value="'+ee(d.t3||'')+'" placeholder="③ 第三件事" oninput="sR(\'t3\',this.value)"></div>'
-      +'<div class="card"><span class="lbl">避坑提醒/微习惯</span><textarea rows="2" placeholder="e.g. 不要一开始就刷手机……" oninput="sR(\'avoid\',this.value)" style="margin-top:5px">'+ee(d.avoid||'')+'</textarea></div>';
+      +'<div class="card"><span class="lbl">避坑提醒/微习惯</span>'
+      +'<textarea rows="2" placeholder="e.g. 不要一开始就刷手机……" oninput="sR(\'avoid\',this.value)" style="margin-top:5px">'+ee(d.avoid||'')+'</textarea></div>';
   }
 
+  // ── 晚间复盘 ───────────────────────────────────────────────
   if(rT==='pm'){
-    if(d.submitted)h+='<div style="background:var(--sbg);border:.5px solid var(--sbd);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--stx)">✓ 今日已归档'+(d.submittedAt?' · '+d.submittedAt:'')+' ，可在「历史」查看。表单仍可补充。</div>';
-    if(d.t1||d.t2||d.t3)h+='<div class="card" style="background:var(--sec);border:none"><span class="lbl" style="margin-bottom:4px">今日3件事</span>'+[d.t1,d.t2,d.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:3px 0">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')+'</div>';
+    // show morning tasks for reference
+    if(d.t1||d.t2||d.t3){
+      h+='<div class="card" style="background:var(--sec);border:none">'
+        +'<span class="lbl" style="margin-bottom:4px">今日目标</span>'
+        +[d.t1,d.t2,d.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:3px 0">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
+        +'</div>';
+    }
     h+='<div class="card"><span class="lbl">① 今日完成</span>'
-      +'<span class="hint">实际完成情况</span><textarea rows="3" placeholder="实际完成了什么……" oninput="sR(\'done\',this.value)" style="margin-bottom:7px">'+ee(d.done||'')+'</textarea>'
-      +'<span class="hint">额外完成/意外收获</span><textarea rows="2" placeholder="超预期的事……" oninput="sR(\'bonus\',this.value)">'+ee(d.bonus||'')+'</textarea></div>'
+      +'<span class="hint">实际完成情况</span>'
+      +'<textarea rows="3" placeholder="实际完成了什么……" oninput="sR(\'done\',this.value)" style="margin-bottom:7px">'+ee(d.done||'')+'</textarea>'
+      +'<span class="hint">额外完成/意外收获</span>'
+      +'<textarea rows="2" placeholder="超预期的事……" oninput="sR(\'bonus\',this.value)">'+ee(d.bonus||'')+'</textarea></div>'
       +'<div class="card"><span class="lbl">② 问题与不足</span>'
-      +'<span class="hint">做得不够好的地方</span><textarea rows="2" oninput="sR(\'bad\',this.value)" style="margin-bottom:7px">'+ee(d.bad||'')+'</textarea>'
-      +'<span class="hint">浪费时间/拖延的点</span><textarea rows="2" oninput="sR(\'delay\',this.value)" style="margin-bottom:7px">'+ee(d.delay||'')+'</textarea>'
-      +'<span class="hint">情绪/状态问题</span><textarea rows="2" oninput="sR(\'moodN\',this.value)">'+ee(d.moodN||'')+'</textarea></div>'
+      +'<span class="hint">做得不够好的地方</span>'
+      +'<textarea rows="2" oninput="sR(\'bad\',this.value)" style="margin-bottom:7px">'+ee(d.bad||'')+'</textarea>'
+      +'<span class="hint">浪费时间/拖延的点</span>'
+      +'<textarea rows="2" oninput="sR(\'delay\',this.value)" style="margin-bottom:7px">'+ee(d.delay||'')+'</textarea>'
+      +'<span class="hint">情绪/状态问题</span>'
+      +'<textarea rows="2" oninput="sR(\'moodN\',this.value)">'+ee(d.moodN||'')+'</textarea></div>'
       +'<div class="card"><span class="lbl">③ 今日反思</span>'
-      +'<span class="hint">今天学到了什么？</span><textarea rows="2" oninput="sR(\'learn\',this.value)" style="margin-bottom:7px">'+ee(d.learn||'')+'</textarea>'
-      +'<span class="hint">哪个决定做对了/做错了？</span><textarea rows="2" oninput="sR(\'dec\',this.value)" style="margin-bottom:7px">'+ee(d.dec||'')+'</textarea>'
-      +'<span class="hint">如果重来一天，我会改什么？</span><textarea rows="2" oninput="sR(\'redo\',this.value)">'+ee(d.redo||'')+'</textarea></div>'
+      +'<span class="hint">今天学到了什么？</span>'
+      +'<textarea rows="2" oninput="sR(\'learn\',this.value)" style="margin-bottom:7px">'+ee(d.learn||'')+'</textarea>'
+      +'<span class="hint">哪个决定做对了/做错了？</span>'
+      +'<textarea rows="2" oninput="sR(\'dec\',this.value)" style="margin-bottom:7px">'+ee(d.dec||'')+'</textarea>'
+      +'<span class="hint">如果重来一天，我会改什么？</span>'
+      +'<textarea rows="2" oninput="sR(\'redo\',this.value)">'+ee(d.redo||'')+'</textarea></div>'
       +'<div class="card"><span class="lbl">④ 明日计划</span>'
       +'<input type="text" value="'+ee(d.m1||'')+'" placeholder="① 明日最重要的事" oninput="sR(\'m1\',this.value)" style="margin-top:5px;margin-bottom:6px">'
       +'<input type="text" value="'+ee(d.m2||'')+'" placeholder="② 第二件事" oninput="sR(\'m2\',this.value)" style="margin-bottom:6px">'
       +'<input type="text" value="'+ee(d.m3||'')+'" placeholder="③ 第三件事" oninput="sR(\'m3\',this.value)"></div>'
-      +'<div class="card"><span class="lbl">⑤ 今日评分</span><div class="sc4">'+[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){return'<div class="si"><div style="font-size:11px;color:var(--tx2);margin-bottom:4px">'+s[1]+'</div><div style="font-size:18px;font-weight:500;color:var(--bl)"><span id="sc'+s[0]+'">'+(d[s[0]]||5)+'</span><span style="font-size:10px;color:var(--tx2)">/10</span></div><input type="range" min="1" max="10" value="'+(d[s[0]]||5)+'" oninput="sSc(\''+s[0]+'\',this.value)" style="margin-top:4px"></div>'}).join('')+'</div></div>'
-      +(!d.submitted?'<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>':'');
+      +'<div class="card"><span class="lbl">⑤ 今日评分</span>'
+      +'<div class="sc4">'+[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){
+        return'<div class="si"><div style="font-size:11px;color:var(--tx2);margin-bottom:4px">'+s[1]+'</div>'
+          +'<div style="font-size:18px;font-weight:500;color:var(--bl)"><span id="sc'+s[0]+'">'+(d[s[0]]||5)+'</span><span style="font-size:10px;color:var(--tx2)">/10</span></div>'
+          +'<input type="range" min="1" max="10" value="'+(d[s[0]]||5)+'" oninput="sSc(\''+s[0]+'\',this.value)" style="margin-top:4px"></div>';
+      }).join('')+'</div></div>';
+    // submit button - always show if not submitted today
+    if(!d.submitted){
+      h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
+    } else {
+      h+='<div style="text-align:center;padding:10px;font-size:12px;color:var(--stx)">✓ 已提交 · '+( d.submittedAt||'')+' · 可在历史查看</div>';
+    }
   }
 
+  // ── 极简版 ─────────────────────────────────────────────────
   if(rT==='q'){
-    if(d.submitted)h+='<div style="background:var(--sbg);border:.5px solid var(--sbd);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:var(--stx)">✓ 今日已归档，表单仍可补充。</div>';
     h+='<div class="card" style="background:var(--ibg);border-color:var(--ibd);margin-bottom:11px"><span class="hint" style="color:var(--itx);margin:0">⚡ 忙碌的日子用这个，5分钟搞定。</span></div>';
-    [['kw','今日关键词','一两个词'],['high','高光时刻','今天最好的那一刻'],['low','踩坑时刻','今天最糟糕的那一刻'],['fix','明日改进','明天只改一件事'],['q','一句话总结','用一句话概括今天']].forEach(function(f){h+='<div class="card"><span class="lbl">'+f[1]+'</span><input type="text" value="'+ee(d[f[0]]||'')+'" placeholder="'+f[2]+'……" oninput="sR(\''+f[0]+'\',this.value)" style="margin-top:5px"></div>'});
-    if(!d.submitted)h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
+    [['kw','今日关键词','一两个词'],['high','高光时刻','今天最好的那一刻'],['low','踩坑时刻','今天最糟糕的那一刻'],['fix','明日改进','明天只改一件事'],['q','一句话总结','用一句话概括今天']].forEach(function(f){
+      h+='<div class="card"><span class="lbl">'+f[1]+'</span><input type="text" value="'+ee(d[f[0]]||'')+'" placeholder="'+f[2]+'……" oninput="sR(\''+f[0]+'\',this.value)" style="margin-top:5px"></div>';
+    });
+    if(!d.submitted){
+      h+='<button class="btn w" onclick="submitRec()">提交今日复盘 →</button>';
+    }
   }
 
+  // ── 历史（按月分组，完整表单）─────────────────────────────
   if(rT==='h'){
     var en=Object.entries(all).sort(function(a,b){return b[0].localeCompare(a[0])});
-    if(!en.length){h+='<p style="text-align:center;color:var(--tx2);padding:40px 0;font-size:12px">还没有历史记录</p>';}
-    else{
+    if(!en.length){
+      h+='<p style="text-align:center;color:var(--tx2);padding:40px 0;font-size:12px">还没有历史记录</p>';
+    } else {
       var months={};
-      en.forEach(function(entry){var ym=entry[0].slice(0,7);if(!months[ym])months[ym]=[];months[ym].push(entry);});
-      var ymKeys=Object.keys(months).sort(function(a,b){return b.localeCompare(a)});
-      ymKeys.forEach(function(ym){
+      en.forEach(function(entry){
+        var ym=entry[0].slice(0,7);
+        if(!months[ym])months[ym]=[];
+        months[ym].push(entry);
+      });
+      Object.keys(months).sort(function(a,b){return b.localeCompare(a)}).forEach(function(ym){
         var parts=ym.split('-');
         var label=parts[0]+'年'+parseInt(parts[1])+'月';
         var mid='m'+ym.replace('-','');
         h+='<div style="margin-bottom:8px">'
           +'<button onclick="var el=document.getElementById(\''+mid+'\');if(el){var s=el.style.display===\'none\';el.style.display=s?\'block\':\'none\';this.textContent=(s?\'▼ \':\'▲ \')+\''+label+'\'}" style="width:100%;text-align:left;padding:8px 12px;background:var(--nv);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit">▼ '+label+'</button>'
           +'<div id="'+mid+'" style="padding-top:6px">';
+
         months[ym].forEach(function(entry){
           var date=entry[0];var dd=entry[1];var isToday=date===tk;
           h+='<div class="card" style="margin-bottom:7px'+(isToday?';border-color:var(--bl)':'')+'">'
@@ -221,21 +264,56 @@ function pRec(){
             +'<div style="display:flex;align-items:center;gap:7px">'
             +(dd.st?'<span class="chip '+(dd.st>=7?'g':dd.st>=4?'':'n')+'">'+dd.st+'/10</span>':'')
             +'<span class="arr" style="font-size:10px;color:var(--tx2)">▼</span></div></div>'
-            +'<div id="rh'+date+'" style="display:none;margin-top:10px">'
-            // Morning section
-            +(dd.t1||dd.t2||dd.t3?'<div class="fb"><span class="lbl">☀ 早间目标</span>'+[dd.t1,dd.t2,dd.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:4px 0;border-bottom:.5px solid var(--bd)">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')+'</div>':'')
-            // Evening section - editable
-            +(dd.done?'<div class="fb"><span class="lbl">完成情况</span><textarea rows="3" style="margin-top:5px" oninput="var a=ld(\'os_rec\',{});if(!a[\''+date+'\'])a[\''+date+'\']={}; a[\''+date+'\'].done=this.value;sv(\'os_rec\',a)">'+ee(dd.done)+'</textarea></div>':'')
-            +(dd.bad?'<div class="fb"><span class="lbl">问题不足</span><textarea rows="2" style="margin-top:5px" oninput="var a=ld(\'os_rec\',{});if(!a[\''+date+'\'])a[\''+date+'\']={}; a[\''+date+'\'].bad=this.value;sv(\'os_rec\',a)">'+ee(dd.bad)+'</textarea></div>':'')
-            +(dd.learn?'<div class="fb"><span class="lbl">今日反思</span><textarea rows="2" style="margin-top:5px" oninput="var a=ld(\'os_rec\',{});if(!a[\''+date+'\'])a[\''+date+'\']={}; a[\''+date+'\'].learn=this.value;sv(\'os_rec\',a)">'+ee(dd.learn)+'</textarea></div>':'')
-            +(dd.q?'<div style="font-size:11px;color:var(--tx2);margin-top:5px;font-style:italic;padding:0 2px">「'+ee(dd.q)+'」</div>':'')
-            +(dd.st?'<div style="display:flex;justify-content:space-around;text-align:center;margin-top:10px;padding:8px 0;background:var(--sec);border-radius:8px">'+[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){return'<div><div style="font-size:9px;color:var(--tx2)">'+s[1]+'</div><div style="font-size:16px;font-weight:500;color:var(--bl)">'+(dd[s[0]]||'-')+'</div></div>'}).join('')+'</div>':'')
-            +'</div></div>';
+            // Full record - expanded
+            +'<div id="rh'+date+'" style="display:none;margin-top:10px">';
+
+          // Morning tasks (read-only)
+          if(dd.t1||dd.t2||dd.t3){
+            h+='<div class="fb"><span class="lbl">☀ 早间目标</span>'
+              +[dd.t1,dd.t2,dd.t3].filter(Boolean).map(function(t,i){return'<div style="font-size:13px;padding:4px 0;border-bottom:.5px solid var(--bd)">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
+              +'</div>';
+          }
+          if(dd.avoid)h+='<div class="fb"><span class="lbl">避坑提醒</span><div style="font-size:12px;color:var(--tx2);margin-top:3px">'+ee(dd.avoid)+'</div></div>';
+
+          // Evening fields - all editable
+          var evFields=[
+            ['done','完成情况',3],['bonus','额外收获',2],
+            ['bad','问题不足',2],['delay','浪费时间',2],['moodN','情绪状态',2],
+            ['learn','今日反思',2],['dec','关键决定',2],['redo','如果重来',2]
+          ];
+          evFields.forEach(function(f){
+            if(dd[f[0]]){
+              h+='<div class="fb"><span class="lbl">'+f[1]+'</span>'
+                +'<textarea rows="'+f[2]+'" style="margin-top:5px" oninput="var a=ld(\'os_rec\',{});if(!a[\''+date+'\'])a[\''+date+'\']={}; a[\''+date+'\'].'+f[0]+'=this.value;sv(\'os_rec\',a)">'+ee(dd[f[0]])+'</textarea>'
+                +'</div>';
+            }
+          });
+
+          // Tomorrow plan
+          if(dd.m1||dd.m2||dd.m3){
+            h+='<div class="fb"><span class="lbl">明日计划</span>'
+              +[dd.m1,dd.m2,dd.m3].filter(Boolean).map(function(t,i){return'<div style="font-size:12px;padding:3px 0">'+['①','②','③'][i]+' '+ee(t)+'</div>'}).join('')
+              +'</div>';
+          }
+
+          // Scores
+          if(dd.st){
+            h+='<div style="display:flex;justify-content:space-around;text-align:center;padding:10px;background:var(--sec);border-radius:8px;margin-top:4px">'
+              +[['se','效率'],['sm','情绪'],['sg','成长'],['st','总体']].map(function(s){
+                return'<div><div style="font-size:9px;color:var(--tx2)">'+s[1]+'</div><div style="font-size:16px;font-weight:500;color:var(--bl)">'+(dd[s[0]]||'-')+'</div></div>';
+              }).join('')+'</div>';
+          }
+
+          // Quick version
+          if(dd.q)h+='<div style="font-size:11px;color:var(--tx2);margin-top:8px;font-style:italic;text-align:center">「'+ee(dd.q)+'」</div>';
+
+          h+='</div></div>';
         });
         h+='</div></div>';
       });
     }
   }
+
   $('ct').innerHTML=h;
 }
 
