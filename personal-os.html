@@ -22,12 +22,12 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;min-height:100vh}
-#app{max-width:500px;margin:0 auto;padding-bottom:16px}
+#app{max-width:500px;margin:0 auto;padding-bottom:80px}
 .hdr{background:var(--sf);border-bottom:.5px solid var(--bd);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:9}
 .hdr h1{font-size:16px;font-weight:500;color:var(--nv)}
 .hdr p{font-size:11px;color:var(--tx2);margin-top:1px}
 #ct{padding:12px}
-.nav{background:var(--sf);border-top:.5px solid var(--bd);display:flex;padding:6px 0 max(10px,env(safe-area-inset-bottom));position:sticky;bottom:0}
+.nav{background:var(--sf);border-top:.5px solid var(--bd);display:flex;padding:6px 0 max(10px,env(safe-area-inset-bottom));position:fixed;bottom:0;left:0;right:0;z-index:99;max-width:500px;margin:0 auto;width:100%}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;font-family:inherit;color:var(--tx2);font-size:9px;-webkit-tap-highlight-color:transparent}
 .nb.on{color:var(--bl)}
 .ic{font-size:15px;padding:2px 8px;border-radius:5px;display:block}
@@ -470,6 +470,61 @@ window.deleteRec = function(id){
   pRec();
 };
 
+var MSGS=[
+  '本次任务已提交，系统运行良好，继续保持～',
+  '今日进度已同步，能量值已满格 ✅',
+  '操作完成，状态更新成功，你超棒的！',
+  '数据已保存，个人系统持续优化中',
+  '你已经做得很好啦，安心去休息吧',
+  '认真生活的你，真的在闪闪发光',
+  '今天也辛苦啦，值得所有美好',
+  '万事顺意，平安喜乐，你超值得',
+  'You are the luckiest girl in the world 🌟',
+  '好运已签收，快乐正在派送',
+  '今日份幸运已加载完毕',
+  '好事正奔你而来，一切都刚刚好',
+  '任务完成，快乐加倍',
+  '今日闭环，明天继续发光',
+  '一切顺利，万事胜意'
+];
+
+function showToast(msg){
+  var t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--nv);color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-family:inherit;z-index:999;max-width:320px;text-align:center;line-height:1.5;box-shadow:0 4px 16px rgba(27,43,75,.25);opacity:0;transition:opacity .3s';
+  t.innerHTML='<div style="font-size:11px;color:rgba(255,255,255,.6);margin-bottom:4px">✓ 本次表单已提交</div>'+msg;
+  document.body.appendChild(t);
+  setTimeout(function(){t.style.opacity='1'},10);
+  setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove()},400)},3000);
+}
+
+var MSGS=[
+  '本次任务已提交，系统运行良好，继续保持～',
+  '今日进度已同步，能量值已满格 ✅',
+  '操作完成，状态更新成功，你超棒的！',
+  '数据已保存，个人系统持续优化中 ✨',
+  '你已经做得很好啦，安心去休息吧',
+  '认真生活的你，真的在闪闪发光 🌟',
+  '今天也辛苦啦，值得所有美好',
+  '万事顺意，平安喜乐，你超值得 🌸',
+  'You are the luckiest girl in the world ✨',
+  '好运已签收，快乐正在派送 🍀',
+  '今日份幸运已加载完毕',
+  '好事正奔你而来，一切都刚刚好 💫',
+  '本次表单已提交，祝你拥有美好的一天',
+  '任务完成，快乐加倍 🎉',
+  '今日闭环，明天继续发光',
+  '一切顺利，万事胜意 🌈'
+];
+
+function showToast(msg){
+  var t=document.createElement('div');
+  t.innerHTML='<div style="font-size:32px;margin-bottom:8px">✓</div><div>'+msg+'</div>';
+  t.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(237,247,240,.96);border:1.5px solid #B8DDD0;color:#2E7D5E;padding:20px 24px;border-radius:16px;font-size:13px;line-height:1.7;text-align:center;max-width:280px;z-index:999;box-shadow:0 8px 32px rgba(46,125,94,.12);pointer-events:none;opacity:0;transition:opacity .25s;backdrop-filter:blur(8px)';
+  document.body.appendChild(t);
+  setTimeout(function(){t.style.opacity='1'},10);
+  setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove()},300)},2800);
+}
+
 window.submitRec = function(){
   var tk=td();
   var draft=ld('os_draft',{})[tk]||{};
@@ -486,6 +541,7 @@ window.submitRec = function(){
   var allDraft=ld('os_draft',{});
   delete allDraft[tk];
   sv('os_draft',allDraft);
+  showToast(MSGS[Math.floor(Math.random()*MSGS.length)]);
   pRec();
 };
 
